@@ -1,6 +1,10 @@
 print("ECE 366 Project 4: MIPS Simulator")
 
 
+def hex_to_bin(hex_str):
+    return str(int(hex_str, 16))[2:].zfill(32)
+
+
 def file_to_array(file):
     return_array = []
     for line in file:
@@ -15,8 +19,35 @@ def print_output(reg_arr, pc):
 
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc):
-    # TODO: Implement ADD, SUB, XOR, ADDI
     # TODO: Implement BEQ, BNE, SLT, LW, SW
+    bin_str = hex_to_bin(mc_hex)
+    # ADD
+    if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
+        print("ADD")
+    # SUB
+    elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
+        print("SUB")
+    # XOR
+    elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
+        print("XOR")
+    # ADDI
+    elif bin_str[0:6] == "001000":
+        print("ADDI")
+    # BEQ
+    elif bin_str[0:6] == "000100":
+        print("BEQ")
+    # BNE
+    elif bin_str[0:6] == "000101":
+        print("BNE")
+    # SLT
+    elif bin_str[0:6] == "000000" and bin_str[26:32] == "00000101010":
+        print("SLT")
+    # LW
+    elif bin_str[0:6] == "100011":
+        print("LW")
+    # SW
+    elif bin_str[0:6] == "101011":
+        print("SW")
     pc += 4
 
     return [data_mem, reg_arr, pc]

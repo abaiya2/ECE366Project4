@@ -14,12 +14,12 @@ def print_output(reg_arr, pc):
         print("$" + str(i) + ": ", '0x{0:08X}'.format(reg_arr[i]))
 
 
-def execute_operation(mc_bin, data_mem, reg_arr, pc):
+def execute_operation(mc_hex, data_mem, reg_arr, pc):
     # TODO: Implement ADD, SUB, XOR, ADDI
     # TODO: Implement BEQ, BNE, SLT, LW, SW
     pc += 4
 
-    return [mc_bin, data_mem, reg_arr, pc]
+    return [data_mem, reg_arr, pc]
 
 
 # Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
@@ -35,16 +35,14 @@ def simulator(instr_mem_file_name, cpu_design):
     data_mem = [0] * 1023  # Create a data memory array
     data_address = 0x2000  # Initialize starting range of data_mem to be 0x2000
     pc = 0
-    mc_bin = instr_mem[pc]
-    while mc_bin != "00010000000000001111111111111111":
-        data_set = execute_operation(mc_bin, data_mem, reg_arr, pc)
-        mc_bin = data_set[0]
-        data_mem = data_set[1]
-        reg_arr = data_set[2]
-
-        pc = data_set[3]
+    mc_hex = instr_mem[pc]
+    while mc_hex != "0x1000FFFF":
+        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc)
+        data_mem = data_set[0]
+        reg_arr = data_set[1]
+        pc = data_set[2]
         index = int(pc / 4)
-        mc_bin = instr_mem[index]
+        mc_hex = instr_mem[index]
 
     print_output(reg_arr, pc)
 

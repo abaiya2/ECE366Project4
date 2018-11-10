@@ -22,7 +22,12 @@ def execute_operation(mc_bin, data_mem, reg_arr, pc):
     return [mc_bin, data_mem, reg_arr, pc]
 
 
-def simulator(instr_mem_file_name):
+# Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
+def simulator(instr_mem_file_name, cpu_design):
+    if cpu_design == 0:
+        print("Multi-Cycle CPU: ")
+    else:
+        print("Pipelined CPU: ")
     # Use the file name to create an array of instructions
     instr_mem_file = open(instr_mem_file_name, "r")
     instr_mem = file_to_array(instr_mem_file)
@@ -44,4 +49,5 @@ def simulator(instr_mem_file_name):
     print_output(reg_arr, pc)
 
 
-simulator("i_mem.txt")
+simulator("i_mem.txt", 0)
+simulator("i_mem.txt", 1)

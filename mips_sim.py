@@ -8,6 +8,12 @@ def file_to_array(file):
     return return_array
 
 
+def print_output(reg_arr, pc):
+    print("PC: ", '0x{0:08X}'.format(pc))
+    for i in range(1, 8):
+        print("$" + str(i) + ": ", '0x{0:08X}'.format(reg_arr[i]))
+
+
 def execute_operation(mc_bin, data_mem, reg_arr, pc):
     # TODO: Implement ADD, SUB, XOR, ADDI
     # TODO: Implement BEQ, BNE, SLT, LW, SW
@@ -26,7 +32,6 @@ def simulator(instr_mem_file_name):
     pc = 0
     mc_bin = instr_mem[pc]
     while mc_bin != "00010000000000001111111111111111":
-        print(mc_bin)
         data_set = execute_operation(mc_bin, data_mem, reg_arr, pc)
         mc_bin = data_set[0]
         data_mem = data_set[1]
@@ -35,6 +40,8 @@ def simulator(instr_mem_file_name):
         pc = data_set[3]
         index = int(pc / 4)
         mc_bin = instr_mem[index]
+
+    print_output(reg_arr, pc)
 
 
 simulator("i_mem.txt")

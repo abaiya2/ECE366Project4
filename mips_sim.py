@@ -24,9 +24,17 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
         print("ADD")
+        rd = int(bin_str[16:21], 2)
+        rs = int(bin_str[6:11], 2)
+        rt = int(bin_str[11:16], 2)
+        reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
         print("SUB")
+        rd = int(bin_str[16:21], 2)
+        rs = int(bin_str[6:11], 2)
+        rt = int(bin_str[11:16], 2)
+        reg_arr[rd] = reg_arr[rs] - reg_arr[rt]
     # XOR
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
         print("XOR")

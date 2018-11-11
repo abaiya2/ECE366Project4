@@ -1,6 +1,26 @@
 print("ECE 366 Project 4: MIPS Simulator")
 
 
+def decimal_to_bin(dec_num):
+    bin_num = 0
+    if dec_num < 0:
+        pos_value = 0 - dec_num
+        comp_value = 0b11111111111111111111111111111111 - pos_value  + 1
+        bin_num = '{0:032b}'.format(comp_value)
+    else:
+        bin_num = '{0:032b}'.format(dec_num)
+    return bin_num
+
+
+def bin_to_decimal(bin_str):
+    dec_num = 0
+    if bin_str[0] == "1":
+        dec_num = 0b11111111111111111111111111111111 \
+                  - int(bin_str, 2) + 1
+    else:
+        dec_num = int(bin_str, 2)
+
+
 def hex_to_bin(hex_str):
     return str(int(hex_str, 16))[2:].zfill(32)
 

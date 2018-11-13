@@ -116,6 +116,12 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
     # SW
     elif bin_str[0:6] == "101011":
         print("SW")
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        imm_bin = bin_str[16:31]
+        imm = bin_to_decimal(imm_bin)
+        d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
+        data_mem[d_mem_index] = bin_to_hex(decimal_to_bin(reg_arr[rt]))
     pc += 4
 
     return [data_mem, reg_arr, pc]

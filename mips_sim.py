@@ -19,6 +19,7 @@ def bin_to_decimal(bin_str):
                   - int(bin_str, 2) + 1
     else:
         dec_num = int(bin_str, 2)
+    return dec_num
 
 
 def hex_to_bin(hex_str):
@@ -61,6 +62,11 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
     # ADDI
     elif bin_str[0:6] == "001000":
         print("ADDI")
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        imm_bin = bin_str[16:31]
+        imm = bin_to_decimal(imm_bin)
+        reg_arr[rs] = reg_arr[rt] + imm
     # BEQ
     elif bin_str[0:6] == "000100":
         print("BEQ")

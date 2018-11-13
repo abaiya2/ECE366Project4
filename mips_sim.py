@@ -26,6 +26,10 @@ def hex_to_bin(hex_str):
     return str(int(hex_str, 16))[2:].zfill(32)
 
 
+def bin_to_hex(bin_num):
+    return '0x{0:08X}'.format(int(bin_num, 2))
+
+
 def file_to_array(file):
     return_array = []
     for line in file:
@@ -36,11 +40,11 @@ def file_to_array(file):
 def print_output(reg_arr, pc):
     print("PC: ", '0x{0:08X}'.format(pc))
     for i in range(1, 8):
-        print("$" + str(i) + ": ", '0x{0:08X}'.format(reg_arr[i]))
+        bin_num = decimal_to_bin(reg_arr[i])
+        print("$" + str(i) + ": ", bin_to_hex(bin_num))
 
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc):
-    # TODO: Implement BEQ, BNE, SLT, LW, SW
     bin_str = hex_to_bin(mc_hex)
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":

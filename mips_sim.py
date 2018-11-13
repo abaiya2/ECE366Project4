@@ -2,24 +2,24 @@ print("ECE 366 Project 4: MIPS Simulator")
 
 
 def decimal_to_bin(dec_num):
-    bin_num = 0
     if dec_num < 0:
         pos_value = 0 - dec_num
         comp_value = 0b11111111111111111111111111111111 - pos_value  + 1
         bin_num = '{0:032b}'.format(comp_value)
+        return bin_num
     else:
         bin_num = '{0:032b}'.format(dec_num)
-    return bin_num
+        return bin_num
 
 
 def bin_to_decimal(bin_str):
-    dec_num = 0
     if bin_str[0] == "1":
         dec_num = 0b11111111111111111111111111111111 \
                   - int(bin_str, 2) + 1
+        return dec_num
     else:
         dec_num = int(bin_str, 2)
-    return dec_num
+        return dec_num
 
 
 def hex_to_bin(hex_str):
@@ -46,19 +46,23 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
         print("ADD")
         rd = int(bin_str[16:21], 2)
-        rs = int(bin_str[6:11], 2)
         rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
         reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
         print("SUB")
         rd = int(bin_str[16:21], 2)
-        rs = int(bin_str[6:11], 2)
         rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
         reg_arr[rd] = reg_arr[rs] - reg_arr[rt]
     # XOR
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
         print("XOR")
+        rd = int(bin_str[16:21], 2)
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        reg_arr[rd] = reg_arr[rt] ^ reg_arr[rs]
     # ADDI
     elif bin_str[0:6] == "001000":
         print("ADDI")

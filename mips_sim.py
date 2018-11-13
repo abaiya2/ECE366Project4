@@ -74,12 +74,31 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
     # BEQ
     elif bin_str[0:6] == "000100":
         print("BEQ")
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        imm_bin = bin_str[16:31]
+        imm = bin_to_decimal(imm_bin)
+        if reg_arr[rt] == reg_arr[rs]:
+            pc += (imm * 4)
     # BNE
     elif bin_str[0:6] == "000101":
         print("BNE")
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        imm_bin = bin_str[16:31]
+        imm = bin_to_decimal(imm_bin)
+        if reg_arr[rt] != reg_arr[rs]:
+            pc += (imm * 4)
     # SLT
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "00000101010":
         print("SLT")
+        rd = int(bin_str[16:21], 2)
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        if reg_arr[rs] < reg_arr[rt]:
+            reg_arr[rd] = 1
+        else:
+            reg_arr[rd] = 0
     # LW
     elif bin_str[0:6] == "100011":
         print("LW")

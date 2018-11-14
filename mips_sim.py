@@ -80,7 +80,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("BEQ")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
-        imm_bin = bin_str[16:31]
+        imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
@@ -89,7 +89,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("BNE")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
-        imm_bin = bin_str[16:31]
+        imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)

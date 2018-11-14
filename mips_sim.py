@@ -23,7 +23,7 @@ def bin_to_decimal(bin_str):
 
 
 def hex_to_bin(hex_str):
-    return str(int(hex_str, 16))[2:].zfill(32)
+    return str(bin(int(hex_str, 16))[2:].zfill(32))
 
 
 def bin_to_hex(bin_num):
@@ -72,7 +72,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("ADDI")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
-        imm_bin = bin_str[16:31]
+        imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         reg_arr[rs] = reg_arr[rt] + imm
     # BEQ

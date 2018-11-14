@@ -4,7 +4,7 @@ print("ECE 366 Project 4: MIPS Simulator")
 def decimal_to_bin(dec_num):
     if dec_num < 0:
         pos_value = 0 - dec_num
-        comp_value = 0b11111111111111111111111111111111 - pos_value  + 1
+        comp_value = 0b11111111111111111111111111111111 - pos_value + 1
         bin_num = '{0:032b}'.format(comp_value)
         return bin_num
     else:
@@ -33,19 +33,19 @@ def bin_to_hex(bin_num):
 def file_to_array(file):
     return_array = []
     for line in file:
-        return_array.append(line.rstrip())
+        return_array.append(line[0:10].rstrip())
     return return_array
 
 
 def print_output(reg_arr, pc):
-    print("PC: ", '0x{0:08X}'.format(pc))
+    print("PC: ", pc)
     for i in range(1, 8):
-        bin_num = decimal_to_bin(reg_arr[i])
-        print("$" + str(i) + ": ", bin_to_hex(bin_num))
+        print("$" + str(i) + ": ", reg_arr[i])
 
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc):
     bin_str = hex_to_bin(mc_hex)
+    print(bin_str)
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
         print("ADD")
@@ -143,14 +143,20 @@ def simulator(instr_mem_file_name, cpu_design):
     mc_hex = instr_mem[pc]
     while mc_hex != "0x1000FFFF":
         data_set = execute_operation(mc_hex, data_mem, reg_arr, pc)
+        print("BEFORE INSTRUCTION:")
+        print("reg_arr: ", reg_arr)
+        print("PC: ", pc)
         data_mem = data_set[0]
         reg_arr = data_set[1]
         pc = data_set[2]
+        print("AFTER INSTRUCTION:")
+        print("reg_arr: ", reg_arr)
+        print("PC: ", pc, "\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
 
-    print_output(reg_arr, pc)
+    # print_output(reg_arr, pc)
 
 
 simulator("i_mem.txt", 0)
-simulator("i_mem.txt", 1)
+# simulator("i_mem.txt", 1)

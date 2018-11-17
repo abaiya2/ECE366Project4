@@ -14,9 +14,22 @@ def decimal_to_bin(dec_num):
 
 def bin_to_decimal(bin_str):
     if bin_str[0] == "1":
-        dec_num = 0b11111111111111111111111111111111 \
-                  - int(bin_str, 2) + 1
+        pos_num = int(bin_str, 2)
+        all_ones = 0b1111111111111111
+        print(str(bin(pos_num)))
+        dec_num = all_ones - pos_num + 1
+        return 0 - dec_num
+    else:
+        dec_num = int(bin_str, 2)
         return dec_num
+
+
+def bin_to_decimal_32b(bin_str):
+    if bin_str[0] == "1":
+        pos_num = int(bin_str, 2)
+        all_ones = 0b11111111111111111111111111111111
+        dec_num = all_ones - pos_num + 1
+        return 0 - dec_num
     else:
         dec_num = int(bin_str, 2)
         return dec_num
@@ -109,9 +122,9 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("LW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
-        # d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
-        # # d_mem_value = data_mem[d_mem_index]
-        # reg_arr[rt] = bin_to_decimal(hex_to_bin(d_mem_value))
+        d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
+        d_mem_value = data_mem[d_mem_index]
+        reg_arr[rt] = bin_to_decimal_32b(hex_to_bin(d_mem_value))
     # SW
     elif bin_str[0:6] == "101011":
         rt = int(bin_str[11:16], 2)

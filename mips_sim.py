@@ -87,14 +87,14 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("ADDI $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
-        reg_arr[rs] = reg_arr[rt] + imm
+        reg_arr[rt] = reg_arr[rs] + imm
     # BEQ
     elif bin_str[0:6] == "000100":
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
-        print("BEQ $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
+        print("BEQ $" + str(rs) + ", $" + str(rt) + ", " + str(imm))
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
     # BNE
@@ -156,7 +156,10 @@ def simulator(instr_mem_file_name, cpu_design):
     data_address = 0x2000  # Initialize starting range of data_mem to be 0x2000
     pc = 0
     mc_hex = instr_mem[pc]
-    while mc_hex != "0x1000FFFF":
+    bin_str = hex_to_bin(mc_hex)
+    while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
+        if mc_hex == "0x1000ffff":
+            break
         data_set = execute_operation(mc_hex, data_mem, reg_arr, pc)
         print("BEFORE INSTRUCTION:")
         print("reg_arr: ", reg_arr)
@@ -169,9 +172,9 @@ def simulator(instr_mem_file_name, cpu_design):
         print("PC: ", pc, "\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
-        time.sleep(.1)
+        # time.sleep(.2)
     # print_output(reg_arr, pc)
 
 
-simulator("i_mem.txt", 0)
+simulator("A1.txt", 0)
 # simulator("i_mem.txt", 1)

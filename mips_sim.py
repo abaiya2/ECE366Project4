@@ -1,3 +1,5 @@
+import time
+
 print("ECE 366 Project 4: MIPS Simulator")
 
 
@@ -167,7 +169,7 @@ def simulator(instr_mem_file_name, cpu_design):
         print("PC: ", pc, "\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
-
+        time.sleep(.1)
     # print_output(reg_arr, pc)
 
 

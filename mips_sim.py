@@ -107,7 +107,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
     # SLT
-    elif bin_str[0:6] == "000000" and bin_str[26:32] == "00000101010":
+    elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000101010":
         rd = int(bin_str[16:21], 2)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
@@ -164,19 +164,19 @@ def simulator(instr_mem_file_name, cpu_design):
         print("BEFORE INSTRUCTION:")
         print("reg_arr: ", reg_arr)
         print("PC: ", pc)
-        print("Data Mem:", data_mem, "\n")
+        print("Data Mem:", data_mem[0:10], "\n")
         data_mem = data_set[0]
         reg_arr = data_set[1]
         pc = data_set[2]
         print("AFTER INSTRUCTION:")
         print("reg_arr: ", reg_arr)
         print("PC: ", pc, "\n")
-        print("Data Mem:", data_mem, "\n")
+        print("Data Mem:", data_mem[0:10], "\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
         # time.sleep(.2)
     # print_output(reg_arr, pc)
 
 
-#simulator("A1.txt", 0)
-simulator("i_mem.txt", 0)
+simulator("A1.txt", 0)
+# simulator("i_mem.txt", 0)

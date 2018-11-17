@@ -45,83 +45,83 @@ def print_output(reg_arr, pc):
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc):
     bin_str = hex_to_bin(mc_hex)
-    print(bin_str)
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
-        print("ADD")
         rd = int(bin_str[16:21], 2)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
+        print("ADD $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
-        print("SUB")
         rd = int(bin_str[16:21], 2)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
+        print("SUB $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         reg_arr[rd] = reg_arr[rs] - reg_arr[rt]
     # XOR
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
-        print("XOR")
         rd = int(bin_str[16:21], 2)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
+        print("XOR $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         reg_arr[rd] = reg_arr[rt] ^ reg_arr[rs]
     # ADDI
     elif bin_str[0:6] == "001000":
-        print("ADDI")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
+        print("ADDI $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         reg_arr[rs] = reg_arr[rt] + imm
     # BEQ
     elif bin_str[0:6] == "000100":
-        print("BEQ")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
+        print("BEQ $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
     # BNE
     elif bin_str[0:6] == "000101":
-        print("BNE")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
+        print("BNE $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
     # SLT
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "00000101010":
-        print("SLT")
         rd = int(bin_str[16:21], 2)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
+        print("SLT $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         if reg_arr[rs] < reg_arr[rt]:
             reg_arr[rd] = 1
         else:
             reg_arr[rd] = 0
     # LW
     elif bin_str[0:6] == "100011":
-        print("LW")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
-        imm_bin = bin_str[16:31]
+        imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
-        d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
-        d_mem_value = data_mem[d_mem_index]
-        reg_arr[rt] = bin_to_decimal(hex_to_bin(d_mem_value))
+        print("LW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
+        # d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
+        # # d_mem_value = data_mem[d_mem_index]
+        # reg_arr[rt] = bin_to_decimal(hex_to_bin(d_mem_value))
     # SW
     elif bin_str[0:6] == "101011":
-        print("SW")
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
-        imm_bin = bin_str[16:31]
+        imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
+        print("SW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
         d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
         data_mem[d_mem_index] = bin_to_hex(decimal_to_bin(reg_arr[rt]))
+    print(bin_str)
     pc += 4
 
     return [data_mem, reg_arr, pc]

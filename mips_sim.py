@@ -107,7 +107,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
     # SLT
-    elif bin_str[0:6] == "000000" and bin_str[26:32] == "00000101010":
+    elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000101010":
         rd = int(bin_str[16:21], 2)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
@@ -125,7 +125,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("LW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
         d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
         d_mem_value = data_mem[d_mem_index]
-        print("MEM INDEX FOR LW", d_mem_index)
+        print(" MEM INDEX FOR LW: ", d_mem_index)
         reg_arr[rt] = d_mem_value
     # SW
     elif bin_str[0:6] == "101011":
@@ -135,8 +135,10 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         imm = bin_to_decimal(imm_bin)
         print("SW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
         d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
+        print(" MEM INDEX FOR SW: ", d_mem_index)
         data_mem[d_mem_index] = reg_arr[rt]
-    print(bin_str)
+    print(" HEX CODE: ", mc_hex)
+    print(" BIN CODE: ", bin_str)
     pc += 4
 
     return [data_mem, reg_arr, pc]
@@ -145,9 +147,9 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
 # Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
 def simulator(instr_mem_file_name, cpu_design):
     if cpu_design == 0:
-        print("Multi-Cycle CPU: ")
+        print("Multi-Cycle CPU: \n")
     else:
-        print("Pipelined CPU: ")
+        print("Pipelined CPU: \n")
     # Use the file name to create an array of instructions
     instr_mem_file = open(instr_mem_file_name, "r")
     instr_mem = file_to_array(instr_mem_file)
@@ -156,27 +158,33 @@ def simulator(instr_mem_file_name, cpu_design):
     data_address = 0x2000  # Initialize starting range of data_mem to be 0x2000
     pc = 0
     mc_hex = instr_mem[pc]
-    bin_str = hex_to_bin(mc_hex)
     while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
         if mc_hex == "0x1000ffff":
             break
+        temp_reg_arr = reg_arr
+        temp_pc = pc
+        temp_data_mem = data_mem
+        print("\n***************BEFORE INSTRUCTION:**************")
+        # print(" reg_arr: ", temp_reg_arr)
+        # print(" PC: ", temp_pc)
+        print_output(reg_arr, pc)
+        print("Data Mem:", temp_data_mem[0:10])
+        print("*************ASSEMBLER INSTRUCTION:*************")
         data_set = execute_operation(mc_hex, data_mem, reg_arr, pc)
-        print("BEFORE INSTRUCTION:")
-        print("reg_arr: ", reg_arr)
-        print("PC: ", pc)
-        print("Data Mem:", data_mem, "\n")
         data_mem = data_set[0]
         reg_arr = data_set[1]
         pc = data_set[2]
-        print("AFTER INSTRUCTION:")
-        print("reg_arr: ", reg_arr)
-        print("PC: ", pc, "\n")
-        print("Data Mem:", data_mem, "\n")
+        print("****************AFTER INSTRUCTION:**************")
+        # print(" reg_arr: ", reg_arr)
+        # print(" PC: ", pc)
+        print_output(reg_arr, pc)
+        print("Data Mem:", data_mem[0:10])
+        print("****************END INSTRUCTION:****************\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
         # time.sleep(.2)
     # print_output(reg_arr, pc)
 
 
-#simulator("A1.txt", 0)
-simulator("i_mem.txt", 0)
+simulator("A1.txt", 0)
+# simulator("i_mem.txt", 0)

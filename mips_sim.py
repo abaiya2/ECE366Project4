@@ -57,7 +57,7 @@ def print_output(reg_arr, pc):
         print("$" + str(i) + ": ", reg_arr[i])
 
 
-def execute_operation(mc_hex, data_mem, reg_arr, pc):
+def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr):
     bin_str = hex_to_bin(mc_hex)
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
@@ -66,6 +66,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         rs = int(bin_str[6:11], 2)
         print("ADD $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
+        num_multicycle_instr[1] += 1
+        print("Multi-Cycle Count: 4 Cycles")
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
         rd = int(bin_str[16:21], 2)
@@ -73,6 +75,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         rs = int(bin_str[6:11], 2)
         print("SUB $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         reg_arr[rd] = reg_arr[rs] - reg_arr[rt]
+        num_multicycle_instr[1] += 1
+        print("Multi-Cycle Count: 4 Cycles")
     # XOR
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
         rd = int(bin_str[16:21], 2)
@@ -80,6 +84,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         rs = int(bin_str[6:11], 2)
         print("XOR $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
         reg_arr[rd] = reg_arr[rt] ^ reg_arr[rs]
+        num_multicycle_instr[1] += 1
+        print("Multi-Cycle Count: 4 Cycles")
     # ADDI
     elif bin_str[0:6] == "001000":
         rt = int(bin_str[11:16], 2)
@@ -88,6 +94,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         imm = bin_to_decimal(imm_bin)
         print("ADDI $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         reg_arr[rt] = reg_arr[rs] + imm
+        num_multicycle_instr[1] += 1
+        print("Multi-Cycle Count: 4 Cycles")
     # BEQ
     elif bin_str[0:6] == "000100":
         rt = int(bin_str[11:16], 2)
@@ -97,6 +105,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("BEQ $" + str(rs) + ", $" + str(rt) + ", " + str(imm))
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
+        num_multicycle_instr[0] += 1
+        print("Multi-Cycle Count: 3 Cycles")
     # BNE
     elif bin_str[0:6] == "000101":
         rt = int(bin_str[11:16], 2)
@@ -106,6 +116,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("BNE $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
+        num_multicycle_instr[0] += 1
+        print("Multi-Cycle Count: 3 Cycles")
     # SLT
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000101010":
         rd = int(bin_str[16:21], 2)
@@ -116,6 +128,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
             reg_arr[rd] = 1
         else:
             reg_arr[rd] = 0
+        num_multicycle_instr[1] += 1
+        print("Multi-Cycle Count: 4 Cycles")
     # LW
     elif bin_str[0:6] == "100011":
         rt = int(bin_str[11:16], 2)
@@ -127,6 +141,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         d_mem_value = data_mem[d_mem_index]
         print("MEM INDEX FOR LW", d_mem_index)
         reg_arr[rt] = d_mem_value
+        num_multicycle_instr[2] += 1
+        print("Multi-Cycle Count: 5 Cycles")
     # SW
     elif bin_str[0:6] == "101011":
         rt = int(bin_str[11:16], 2)
@@ -136,47 +152,48 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc):
         print("SW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
         d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
         data_mem[d_mem_index] = reg_arr[rt]
-    print(bin_str)
+        num_multicycle_instr[1] += 1
+        print("Multi-Cycle Count: 4 Cycles")
     pc += 4
 
-    return [data_mem, reg_arr, pc]
+    return [data_mem, reg_arr, pc, num_multicycle_instr]
 
 
 # Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
-def simulator(instr_mem_file_name, cpu_design):
-    if cpu_design == 0:
-        print("Multi-Cycle CPU: ")
-    else:
-        print("Pipelined CPU: ")
+def simulator(instr_mem_file_name):
     # Use the file name to create an array of instructions
     instr_mem_file = open(instr_mem_file_name, "r")
     instr_mem = file_to_array(instr_mem_file)
     reg_arr = [0, 0, 0, 0, 0, 0, 0, 0]  # Use an register for $0 - $7 ($0 will not change)
     data_mem = [0] * 1023  # Create a data memory array
-    data_address = 0x2000  # Initialize starting range of data_mem to be 0x2000
     pc = 0
     mc_hex = instr_mem[pc]
-    bin_str = hex_to_bin(mc_hex)
+    num_multicycle_instr = [0, 0, 0]    # Number of 3, 4, and 5 cycle CPU instructions, respectively
+    dic = 0     # Dynamic Instruction Count
     while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
         if mc_hex == "0x1000ffff":
+            dic += 1
+            num_multicycle_instr[0] += 1
             break
-        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc)
-        print("BEFORE INSTRUCTION:")
-        print("reg_arr: ", reg_arr)
-        print("PC: ", pc)
-        print("Data Mem:", data_mem[0:10], "\n")
+        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr)
         data_mem = data_set[0]
         reg_arr = data_set[1]
         pc = data_set[2]
-        print("AFTER INSTRUCTION:")
-        print("reg_arr: ", reg_arr)
-        print("PC: ", pc, "\n")
+        num_multicycle_instr = data_set[3]
+        print_output(reg_arr, pc)
         print("Data Mem:", data_mem[0:10], "\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
-        # time.sleep(.2)
-    # print_output(reg_arr, pc)
+        dic += 1
+
+    print("Num of 3 Cycle Instructions: ", num_multicycle_instr[0])
+    print("Num of 4 Cycle Instructions: ", num_multicycle_instr[1])
+    print("Num of 5 Cycle Instructions: ", num_multicycle_instr[2])
+    print("Dynamic Instruction Count:   ", dic)
 
 
-simulator("A1.txt", 0)
-# simulator("i_mem.txt", 0)
+
+simulator("A1.txt")
+# simulator("A2.txt")
+# simulator("B1.txt")
+# simulator("B2.txt")

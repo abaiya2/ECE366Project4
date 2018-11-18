@@ -57,7 +57,50 @@ def print_output(reg_arr, pc):
         print("$" + str(i) + ": ", reg_arr[i])
 
 
-def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr):
+def get_dependent_instruction(mc_hex):
+    bin_str = hex_to_bin(mc_hex)
+    rd = 0
+    rt = 0
+    rs = 0
+    source_registers = []
+    target_register = 0
+    # R - Type
+    if bin_str[0:6] == "000000":
+        # *** $rd, $rs, $rt
+        rd = int(bin_str[16:21], 2)
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        target_register = rd
+        source_registers = [rt, rs]
+    # ADDI
+    elif bin_str[0:6] == "001000":
+        # ADDI $rt, $rs, imm
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        source_registers = [rs]
+        target_register = rt
+    # BRANCH
+    elif bin_str[0:6] == "000100" or bin_str[0:6] == "000101":
+        # B** $rs, $rt, imm
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        source_registers = [rt, rs]
+    # LW
+    elif bin_str[0:6] == "100011":
+        # LW $rt, imm($rs)
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        target_register = rt
+    # SW
+    elif bin_str[0:6] == "101011":
+        # SW $rt, imm($rs)
+        rt = int(bin_str[11:16], 2)
+        rs = int(bin_str[6:11], 2)
+        source_registers = [rt, rs]
+    return [source_registers, target_register]
+
+
+def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_prev, mc_next):
     bin_str = hex_to_bin(mc_hex)
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
@@ -105,6 +148,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr):
         print("BEQ $" + str(rs) + ", $" + str(rt) + ", " + str(imm))
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
+            print("A DELAY OF 1 is ADDED FOR BEQ")
         num_multicycle_instr[0] += 1
         print("Multi-Cycle Count: 3 Cycles")
     # BNE
@@ -116,6 +160,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr):
         print("BNE $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
+            print("A DELAY OF 1 is ADDED FOR BNE")
         num_multicycle_instr[0] += 1
         print("Multi-Cycle Count: 3 Cycles")
     # SLT
@@ -179,7 +224,7 @@ def simulator(instr_mem_file_name):
             dic += 1
             num_multicycle_instr[0] += 1
             break
-        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr)
+        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_hex_prev, mc_hex_next)
         data_mem = data_set[0]
         reg_arr = data_set[1]
         pc = data_set[2]
@@ -208,7 +253,6 @@ def simulator(instr_mem_file_name):
     print("Num of 4 Cycle Instructions: ", num_multicycle_instr[1])
     print("Num of 5 Cycle Instructions: ", num_multicycle_instr[2])
     print("Dynamic Instruction Count:   ", dic)
-
 
 
 simulator("A1.txt")

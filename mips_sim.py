@@ -72,6 +72,7 @@ def get_dependent_instruction(mc_hex):
         rs = int(bin_str[6:11], 2)
         target_register = rd
         source_registers = [rt, rs]
+        print("*** $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
     # ADDI
     elif bin_str[0:6] == "001000":
         # ADDI $rt, $rs, imm
@@ -100,7 +101,7 @@ def get_dependent_instruction(mc_hex):
     return [source_registers, target_register]
 
 
-def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_prev, mc_next):
+def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
     bin_str = hex_to_bin(mc_hex)
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
@@ -148,9 +149,15 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_pr
         print("BEQ $" + str(rs) + ", $" + str(rt) + ", " + str(imm))
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
-            print("A DELAY OF 1 is ADDED FOR BEQ")
+            print("A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR")
+            pipe_delays[1] += 1
         num_multicycle_instr[0] += 1
         print("Multi-Cycle Count: 3 Cycles")
+        data_registers = get_dependent_instruction(mc_prev)
+        target_register = data_registers[1]
+        if target_register == rt or target_register == rs:
+            print("A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND")
+            pipe_delays[0] += 1
     # BNE
     elif bin_str[0:6] == "000101":
         rt = int(bin_str[11:16], 2)
@@ -160,9 +167,15 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_pr
         print("BNE $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
-            print("A DELAY OF 1 is ADDED FOR BNE")
+            print("A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR")
+            pipe_delays[1] += 1
         num_multicycle_instr[0] += 1
         print("Multi-Cycle Count: 3 Cycles")
+        data_registers = get_dependent_instruction(mc_prev)
+        target_register = data_registers[1]
+        if target_register == rt or target_register == rs:
+            print("A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND")
+            pipe_delays[0] += 1
     # SLT
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000101010":
         rd = int(bin_str[16:21], 2)
@@ -188,6 +201,15 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_pr
         reg_arr[rt] = d_mem_value
         num_multicycle_instr[2] += 1
         print("Multi-Cycle Count: 5 Cycles")
+        data_registers = get_dependent_instruction(mc_next)
+        source_registers = data_registers[0]
+        for i in range(0, len(source_registers)):
+            cur_src_reg = source_registers[i]
+            print("SOURCE REG: ", source_registers[i])
+            if cur_src_reg == rt:
+                print("A DELAY WILL BE REQUIRED FOR LW")
+                pipe_delays[0] += 1
+
     # SW
     elif bin_str[0:6] == "101011":
         rt = int(bin_str[11:16], 2)
@@ -201,7 +223,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_pr
         print("Multi-Cycle Count: 4 Cycles")
     pc += 4
 
-    return [data_mem, reg_arr, pc, num_multicycle_instr]
+    return [data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays]
 
 
 # Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
@@ -217,18 +239,14 @@ def simulator(instr_mem_file_name):
     mc_hex_prev = "0xffffffff"
     mc_hex_next = "0xffffffff"
     num_multicycle_instr = [0, 0, 0]    # Number of 3, 4, and 5 cycle CPU instructions, respectively
-
     dic = 0     # Dynamic Instruction Count
+    pipe_delays = [0, 0]    # Number of Data Hazards and Control Hazards, respectively
     while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
         if mc_hex == "0x1000ffff":
             dic += 1
             num_multicycle_instr[0] += 1
             break
-        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, mc_hex_prev, mc_hex_next)
-        data_mem = data_set[0]
-        reg_arr = data_set[1]
-        pc = data_set[2]
-        num_multicycle_instr = data_set[3]
+
         if index == 0:
             mc_hex_prev = "0xffffffff"
             mc_hex_next = instr_mem[index + 1]
@@ -238,8 +256,15 @@ def simulator(instr_mem_file_name):
         else:
             mc_hex_prev = instr_mem[index - 1]
             mc_hex_next = instr_mem[index + 1]
+        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_hex_prev, mc_hex_next)
+        data_mem = data_set[0]
+        reg_arr = data_set[1]
+        pc = data_set[2]
+        num_multicycle_instr = data_set[3]
+        pipe_delays = data_set[4]
 
         print("INDEX:          ", index)
+        print("CURR INSTRUCTION", mc_hex)
         print("PREV INSTRUCTION", mc_hex_prev)
         print("NEXT INSTRUCTION", mc_hex_next)
 
@@ -249,10 +274,20 @@ def simulator(instr_mem_file_name):
         mc_hex = instr_mem[index]
         dic += 1
 
-    print("Num of 3 Cycle Instructions: ", num_multicycle_instr[0])
-    print("Num of 4 Cycle Instructions: ", num_multicycle_instr[1])
-    print("Num of 5 Cycle Instructions: ", num_multicycle_instr[2])
-    print("Dynamic Instruction Count:   ", dic)
+    num_3_cycle = num_multicycle_instr[0]
+    num_4_cycle = num_multicycle_instr[1]
+    num_5_cycle = num_multicycle_instr[2]
+    multi_cycle_count = (3 * num_3_cycle) + (4 * num_4_cycle) + (5 * num_5_cycle)
+    print("SINGLE-CYLCLE CPU INFORMATION:")
+    print("DIC/Number  of Cycles   ", dic)
+
+    print("\nMULTI-CYLCLE CPU INFORMATION:")
+    print("Num of 3 Cycle Instructions: ", num_3_cycle)
+    print("Num of 4 Cycle Instructions: ", num_4_cycle)
+    print("Num of 5 Cycle Instructions: ", num_5_cycle)
+    print("Total Number of Cycles:      ", multi_cycle_count)
+    print("\n")
+
 
 
 simulator("A1.txt")

@@ -167,8 +167,12 @@ def simulator(instr_mem_file_name):
     reg_arr = [0, 0, 0, 0, 0, 0, 0, 0]  # Use an register for $0 - $7 ($0 will not change)
     data_mem = [0] * 1023  # Create a data memory array
     pc = 0
+    index = 0
     mc_hex = instr_mem[pc]
+    mc_hex_prev = "0xffffffff"
+    mc_hex_next = "0xffffffff"
     num_multicycle_instr = [0, 0, 0]    # Number of 3, 4, and 5 cycle CPU instructions, respectively
+
     dic = 0     # Dynamic Instruction Count
     while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
         if mc_hex == "0x1000ffff":
@@ -180,6 +184,20 @@ def simulator(instr_mem_file_name):
         reg_arr = data_set[1]
         pc = data_set[2]
         num_multicycle_instr = data_set[3]
+        if index == 0:
+            mc_hex_prev = "0xffffffff"
+            mc_hex_next = instr_mem[index + 1]
+        elif index == (len(instr_mem) - 2):
+            mc_hex_prev = instr_mem[index - 1]
+            mc_hex_next = "0xffffffff"
+        else:
+            mc_hex_prev = instr_mem[index - 1]
+            mc_hex_next = instr_mem[index + 1]
+
+        print("INDEX:          ", index)
+        print("PREV INSTRUCTION", mc_hex_prev)
+        print("NEXT INSTRUCTION", mc_hex_next)
+
         print_output(reg_arr, pc)
         print("Data Mem:", data_mem[0:10], "\n")
         index = int(pc / 4)

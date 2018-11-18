@@ -91,6 +91,7 @@ def get_dependent_instruction(mc_hex):
         # LW $rt, imm($rs)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
+        source_registers = [rs]
         target_register = rt
     # SW
     elif bin_str[0:6] == "101011":
@@ -298,7 +299,7 @@ def simulator(instr_mem_file_name):
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
 
-simulator("B2.txt")
+simulator("A1.txt")
 # simulator("A2.txt")
 # simulator("B1.txt")
 # simulator("B2.txt")

@@ -280,17 +280,25 @@ def simulator(instr_mem_file_name):
     multi_cycle_count = (3 * num_3_cycle) + (4 * num_4_cycle) + (5 * num_5_cycle)
     print("SINGLE-CYLCLE CPU INFORMATION:")
     print("DIC/Number  of Cycles   ", dic)
+    print("\n")
 
-    print("\nMULTI-CYLCLE CPU INFORMATION:")
+    print("MULTI-CYLCLE CPU INFORMATION:")
     print("Num of 3 Cycle Instructions: ", num_3_cycle)
     print("Num of 4 Cycle Instructions: ", num_4_cycle)
     print("Num of 5 Cycle Instructions: ", num_5_cycle)
     print("Total Number of Cycles:      ", multi_cycle_count)
     print("\n")
 
+    data_haz_delays = pipe_delays[0]
+    ctrl_haz_delays = pipe_delays[1]
+    pipeline_cycle_count = dic + 4 + data_haz_delays + ctrl_haz_delays
+    print("PIPELINED CPU INFORMATION:")
+    print("Num of Data Hazard Delays: ", data_haz_delays)
+    print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
+    print("Total Number of Cycles:    ", pipeline_cycle_count)
 
 
-simulator("A1.txt")
+simulator("B2.txt")
 # simulator("A2.txt")
 # simulator("B1.txt")
 # simulator("B2.txt")

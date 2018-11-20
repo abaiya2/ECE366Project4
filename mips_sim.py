@@ -296,6 +296,7 @@ def simulator(instr_mem_file_name):
         print("PREV INSTRUCTION", mc_hex_prev)
         print("NEXT INSTRUCTION", mc_hex_next)
 
+        print(instr_mem_file_name)
         print_output(reg_arr, pc)
         print("Data Mem:", data_mem[0:10], "\n")
         index = int(pc / 4)
@@ -306,11 +307,11 @@ def simulator(instr_mem_file_name):
     num_4_cycle = num_multicycle_instr[1]
     num_5_cycle = num_multicycle_instr[2]
     multi_cycle_count = (3 * num_3_cycle) + (4 * num_4_cycle) + (5 * num_5_cycle)
-    print("SINGLE-CYLCLE CPU INFORMATION:")
+    print("SINGLE-CYCLE CPU INFORMATION:")
     print("DIC/Number  of Cycles   ", dic)
     print("\n")
 
-    print("MULTI-CYLCLE CPU INFORMATION:")
+    print("MULTI-CYCLE CPU INFORMATION:")
     print("Num of 3 Cycle Instructions: ", num_3_cycle)
     print("Num of 4 Cycle Instructions: ", num_4_cycle)
     print("Num of 5 Cycle Instructions: ", num_5_cycle)
@@ -325,7 +326,7 @@ def simulator(instr_mem_file_name):
     print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
-    cache_sim(addr_mem)
+    # cache_sim(addr_mem)
 
 simulator("A1.txt")
 # simulator("A2.txt")

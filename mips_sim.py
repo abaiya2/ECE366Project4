@@ -107,7 +107,35 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
     misses = 0
     total = len(addr_mem)
     if num_ways == 1:
+        block = []
+        cache = [{"tag": 0, "block": []}] * num_sets
+        cache[0]["tag"] = 123
+
+        num_bytes = 4 * num_words
+        num_offset_bits = int(math.log(num_bytes, 2))
+        num_block_bits = int(math.log(num_sets, 2))
+        print("Num Block Bits", num_block_bits)
+        print("Number of offset bits", num_offset_bits)
+        # print("CACHE", cache)
         print("DIRECTLY MAPPED CACHE")
+        for i in range(0, len(addr_mem)):
+            bin_num = decimal_to_bin(addr_mem[i])
+            bin_str = str(bin_num)
+            most_sig_bits = bin_str[0: 32 - num_block_bits - num_offset_bits]
+            block = bin_str[len(most_sig_bits): 32 - num_offset_bits]
+            block_index = int(block, 2)
+
+            addr_offset_from_start = (addr_mem[i] - 0x2000) % (num_words * 4)
+            block_start = addr_mem[i] - addr_offset_from_start
+
+            print("ADDR OFFSET", addr_offset_from_start)
+            print("BLOCK START", hex(block_start))
+
+            if cache[0]["tag"] == most_sig_bits:
+                print("HIT")
+            else:
+                print("MISS")
+        print("\n")
 
 
 
@@ -122,8 +150,8 @@ def cache_sim(addr_mem):
     print("\n")
     run_cache_sim_config(4, 1, 2, addr_mem)   #config 3A
     run_cache_sim_config(2, 1, 4, addr_mem)   #config 3B
-    run_cache_sim_config(2, 4, 1, addr_mem)   #config 3C
-    run_cache_sim_config(8, 2, 4, addr_mem)   #config 3D
+    # run_cache_sim_config(2, 4, 1, addr_mem)   #config 3C
+    # run_cache_sim_config(2, 2, 4, addr_mem)   #config 3D
 
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
@@ -299,10 +327,10 @@ def simulator(instr_mem_file_name):
         print("CURR INSTRUCTION", mc_hex)
         print("PREV INSTRUCTION", mc_hex_prev)
         print("NEXT INSTRUCTION", mc_hex_next)
-
         print(instr_mem_file_name)
         print_output(reg_arr, pc)
         print("Data Mem:", data_mem[0:10], "\n")
+        
         index = int(pc / 4)
         mc_hex = instr_mem[index]
         dic += 1

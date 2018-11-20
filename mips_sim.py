@@ -218,7 +218,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
             if cur_src_reg == rt:
                 print("A DELAY WILL BE REQUIRED FOR LW")
                 pipe_delays[0] += 1
-
+#arsalan
     # SW
     elif bin_str[0:6] == "101011":
         rt = int(bin_str[11:16], 2)

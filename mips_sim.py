@@ -101,19 +101,26 @@ def get_dependent_instruction(mc_hex):
         source_registers = [rt, rs]
     return [source_registers, target_register]
 
-def run_cache_sim_config(num_words,num_ways,num_sets):
 
+def run_cache_sim_config(num_words,num_ways,num_sets):
+    print("Number of Words: ", num_words)
+    print("Number of Ways: ", num_ways)
+    print("Number of Sets: ", num_sets)
+    print("\n")
 
 
 def cache_sim(addr_mem):
+    print("\n")
     for i in range(0, len(addr_mem)):
         hex_num = 0x2000 + (addr_mem[i] * 4)
         addr_mem[i] = hex_num
         print(hex(addr_mem[i]))
-    run_cache_sim_config(4,1,2)#config 3A
-    run_cache_sim_config(2,1,4)#config 3B
-    run_cache_sim_config(2,4,1)#config 3C
-    run_cache_sim_config(8,2,4)#config 3D
+    print("\n")
+    run_cache_sim_config(4, 1, 2)   #config 3A
+    run_cache_sim_config(2, 1, 4)   #config 3B
+    run_cache_sim_config(2, 4, 1)   #config 3C
+    run_cache_sim_config(8, 2, 4)   #config 3D
+
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
     bin_str = hex_to_bin(mc_hex)

@@ -141,7 +141,21 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 misses = misses + 1
 
         print("\n")
-
+    # Set Associative, including Fully Associative
+    else:
+        # Number of rows is number of Sets
+        # Number of columns is number of ways
+        if num_sets == 1:
+            print("FULLY ASSOCIATIVE CACHE")
+        else:
+            print("SET ASSOCIATIVE CACHE")
+        print("Number of Sets: ", num_sets)
+        print("Number of Ways: ", num_ways)
+        print("Number of Words in Block: ", num_words)
+        least_recently_used = [list(range(num_ways)) for y in range(num_sets)]
+        for i in range(0, len(least_recently_used)):
+            print(least_recently_used[i])
+        print("\n")
 
 def cache_sim(addr_mem):
     print("\n")
@@ -152,8 +166,8 @@ def cache_sim(addr_mem):
     print("\n")
     run_cache_sim_config(4, 1, 2, addr_mem)   #config 3A
     run_cache_sim_config(2, 1, 4, addr_mem)   #config 3B
-    # run_cache_sim_config(2, 4, 1, addr_mem)   #config 3C
-    # run_cache_sim_config(2, 2, 4, addr_mem)   #config 3D
+    run_cache_sim_config(2, 4, 1, addr_mem)   #config 3C
+    run_cache_sim_config(2, 2, 4, addr_mem)   #config 3D
 
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
@@ -360,7 +374,7 @@ def simulator(instr_mem_file_name):
     print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
-    # cache_sim(addr_mem)
+    cache_sim(addr_mem)
 
 simulator("A1.txt")
 # simulator("A2.txt")

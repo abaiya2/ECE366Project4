@@ -1,4 +1,4 @@
-import time
+import math
 
 print("ECE 366 Project 4: MIPS Simulator")
 
@@ -108,16 +108,17 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
     total = len(addr_mem)
     if num_ways == 1:
         block = []
-        cache = [{"tag": 0, "block": []}] * num_sets
-        cache[0]["tag"] = 123
-
+        # cache = [{"tag": "", "block": []}] * num_sets
+        cache = [""] * num_sets
         num_bytes = 4 * num_words
         num_offset_bits = int(math.log(num_bytes, 2))
         num_block_bits = int(math.log(num_sets, 2))
-        print("Num Block Bits", num_block_bits)
-        print("Number of offset bits", num_offset_bits)
         # print("CACHE", cache)
         print("DIRECTLY MAPPED CACHE")
+        print("Number of Words in Block: ", num_words)
+        print("Number of Blocks:         ", num_sets)
+        # print("Num Block Bits", num_block_bits)
+        # print("Number of offset bits", num_offset_bits)
         for i in range(0, len(addr_mem)):
             bin_num = decimal_to_bin(addr_mem[i])
             bin_str = str(bin_num)
@@ -128,17 +129,18 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             addr_offset_from_start = (addr_mem[i] - 0x2000) % (num_words * 4)
             block_start = addr_mem[i] - addr_offset_from_start
 
-            print("ADDR OFFSET", addr_offset_from_start)
-            print("BLOCK START", hex(block_start))
+            # print("ADDR OFFSET", addr_offset_from_start)
+            # print("BLOCK START", hex(block_start))
 
-            if cache[0]["tag"] == most_sig_bits:
-                print("HIT")
+            if cache[block_index] == most_sig_bits:
+                print(str(hex(addr_mem[i]) + ": HIT"))
+                hits = hits + 1
             else:
-                print("MISS")
+                print(str(hex(addr_mem[i]) + ": MISS"))
+                cache[block_index] = most_sig_bits
+                misses = misses + 1
+
         print("\n")
-
-
-
 
 
 def cache_sim(addr_mem):

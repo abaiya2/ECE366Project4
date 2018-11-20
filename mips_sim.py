@@ -101,14 +101,19 @@ def get_dependent_instruction(mc_hex):
         source_registers = [rt, rs]
     return [source_registers, target_register]
 
+def run_cache_sim_config(num_words,num_ways,num_sets):
+
+
 
 def cache_sim(addr_mem):
     for i in range(0, len(addr_mem)):
         hex_num = 0x2000 + (addr_mem[i] * 4)
         addr_mem[i] = hex_num
         print(hex(addr_mem[i]))
-    print("LENGTH OF ADDRESSES", len(addr_mem))
-
+    run_cache_sim_config(4,1,2)#config 3A
+    run_cache_sim_config(2,1,4)#config 3B
+    run_cache_sim_config(2,4,1)#config 3C
+    run_cache_sim_config(8,2,4)#config 3D
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
     bin_str = hex_to_bin(mc_hex)
@@ -220,7 +225,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
             if cur_src_reg == rt:
                 print("A DELAY WILL BE REQUIRED FOR LW")
                 pipe_delays[0] += 1
-#arsalan
+
     # SW
     elif bin_str[0:6] == "101011":
         rt = int(bin_str[11:16], 2)

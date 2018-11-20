@@ -102,11 +102,15 @@ def get_dependent_instruction(mc_hex):
     return [source_registers, target_register]
 
 
-def run_cache_sim_config(num_words,num_ways,num_sets):
-    print("Number of Words: ", num_words)
-    print("Number of Ways: ", num_ways)
-    print("Number of Sets: ", num_sets)
-    print("\n")
+def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
+    hits = 0
+    misses = 0
+    total = len(addr_mem)
+    if num_ways == 1:
+        print("DIRECTLY MAPPED CACHE")
+
+
+
 
 
 def cache_sim(addr_mem):
@@ -116,10 +120,10 @@ def cache_sim(addr_mem):
         addr_mem[i] = hex_num
         print(hex(addr_mem[i]))
     print("\n")
-    run_cache_sim_config(4, 1, 2)   #config 3A
-    run_cache_sim_config(2, 1, 4)   #config 3B
-    run_cache_sim_config(2, 4, 1)   #config 3C
-    run_cache_sim_config(8, 2, 4)   #config 3D
+    run_cache_sim_config(4, 1, 2, addr_mem)   #config 3A
+    run_cache_sim_config(2, 1, 4, addr_mem)   #config 3B
+    run_cache_sim_config(2, 4, 1, addr_mem)   #config 3C
+    run_cache_sim_config(8, 2, 4, addr_mem)   #config 3D
 
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):

@@ -102,8 +102,15 @@ def get_dependent_instruction(mc_hex):
     return [source_registers, target_register]
 
 
+def cache_sim(addr_mem):
+    for i in range(0, len(addr_mem)):
+        print(addr_mem[i])
+    print("LENGTH OF ADDRESSES", len(addr_mem))
+
+
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
     bin_str = hex_to_bin(mc_hex)
+    lw_addr = 999999999
     # ADD
     if bin_str[0:6] == "000000" and bin_str[21:32] == "00000100000":
         rd = int(bin_str[16:21], 2)
@@ -202,6 +209,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         reg_arr[rt] = d_mem_value
         num_multicycle_instr[2] += 1
         print("Multi-Cycle Count: 5 Cycles")
+        lw_addr= d_mem_index
         data_registers = get_dependent_instruction(mc_next)
         source_registers = data_registers[0]
         for i in range(0, len(source_registers)):
@@ -224,7 +232,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         print("Multi-Cycle Count: 4 Cycles")
     pc += 4
 
-    return [data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays]
+    return [data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, lw_addr]
 
 
 # Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
@@ -242,6 +250,8 @@ def simulator(instr_mem_file_name):
     num_multicycle_instr = [0, 0, 0]    # Number of 3, 4, and 5 cycle CPU instructions, respectively
     dic = 0     # Dynamic Instruction Count
     pipe_delays = [0, 0]    # Number of Data Hazards and Control Hazards, respectively
+    addr_mem = []
+
     while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
         if mc_hex == "0x1000ffff":
             dic += 1
@@ -263,6 +273,9 @@ def simulator(instr_mem_file_name):
         pc = data_set[2]
         num_multicycle_instr = data_set[3]
         pipe_delays = data_set[4]
+        lw_addr_index = data_set[5]
+        if lw_addr_index != 999999999:
+            addr_mem.append(data_set[5])
 
         print("INDEX:          ", index)
         print("CURR INSTRUCTION", mc_hex)
@@ -298,8 +311,10 @@ def simulator(instr_mem_file_name):
     print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
+    cache_sim(addr_mem)
 
 simulator("A1.txt")
 # simulator("A2.txt")
 # simulator("B1.txt")
 # simulator("B2.txt")
+# simulator("i_mem.txt")

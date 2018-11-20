@@ -104,7 +104,9 @@ def get_dependent_instruction(mc_hex):
 
 def cache_sim(addr_mem):
     for i in range(0, len(addr_mem)):
-        print(addr_mem[i])
+        hex_num = 0x2000 + (addr_mem[i] * 4)
+        addr_mem[i] = hex_num
+        print(hex(addr_mem[i]))
     print("LENGTH OF ADDRESSES", len(addr_mem))
 
 

@@ -158,7 +158,7 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         num_set_bits = int(math.log(num_sets, 2))
         least_recently_used = [list(range(num_ways)) for y in range(num_sets)]
         cache_tags = [["" for x in range(num_ways)] for y in range(num_sets)]
-        print(cache_tags)
+        # print(cache_tags)
         # for i in range(0, len(least_recently_used)):
         #     print(least_recently_used[i])
         for i in range(0, len(addr_mem)):
@@ -170,7 +170,7 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             set_index = 0
             if set_bin != "":
                 set_index = int(set_bin, 2)
-            print("SET INDEX", set_index)
+            # print("SET INDEX", set_index)
 
             block_found = False
             block_index = None
@@ -181,9 +181,11 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                     break
 
             if block_found:
-                print("HIT")
+                # print("HIT")
+                hits = hits + 1
             else:
-                print("MISS")
+                # print("MISS")
+                misses = misses + 1
                 # Find index of least recently used block to replace
                 current_set = least_recently_used[set_index]
                 index_of_lru = current_set.index(min(current_set))
@@ -191,7 +193,9 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 least_recently_used[set_index][index_of_lru] = lru_value + num_ways
                 cache_tags[set_index][index_of_lru] = tag
         print("\n")
-
+    print("Mem Access Count: ", len(addr_mem))
+    print("Number of Hits:   ", hits)
+    print("Number of Misses: ", misses)
 
 def cache_sim(addr_mem):
     print("\n")
@@ -412,8 +416,8 @@ def simulator(instr_mem_file_name):
 
     cache_sim(addr_mem)
 
-simulator("A1.txt")
+# simulator("A1.txt")
 # simulator("A2.txt")
 # simulator("B1.txt")
-# simulator("B2.txt")
+simulator("B2.txt")
 # simulator("i_mem.txt")

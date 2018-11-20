@@ -1,7 +1,7 @@
 addi $1, $0, 2
 addi $2, $0, 28
 sw_loop:
-sw $1, 0x2000($2)
+#sw $1, 0x2000($2)
 addi $2, $2, -4
 beq $2, $0, out
 add $1, $1, $1
@@ -24,5 +24,5 @@ add $5, $4, $0
 skip:
 addi $2, $2, 4
 bne $2, $6, loop
-sw $5, 0x2000($0)
+#sw $5, 0x2000($0)
 end: beq $0, $0, end

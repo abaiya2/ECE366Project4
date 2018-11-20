@@ -152,10 +152,46 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         print("Number of Sets: ", num_sets)
         print("Number of Ways: ", num_ways)
         print("Number of Words in Block: ", num_words)
+
+        num_bytes = 4 * num_words
+        num_offset_bits = int(math.log(num_bytes, 2))
+        num_set_bits = int(math.log(num_sets, 2))
         least_recently_used = [list(range(num_ways)) for y in range(num_sets)]
-        for i in range(0, len(least_recently_used)):
-            print(least_recently_used[i])
+        cache_tags = [["" for x in range(num_ways)] for y in range(num_sets)]
+        print(cache_tags)
+        # for i in range(0, len(least_recently_used)):
+        #     print(least_recently_used[i])
+        for i in range(0, len(addr_mem)):
+            bin_num = decimal_to_bin(addr_mem[i])
+            bin_str = str(bin_num)
+            tag = bin_str[0: 32 - num_set_bits - num_offset_bits]
+            set_bin = bin_str[len(tag): 32 - num_offset_bits]
+            # print(set_bin)
+            set_index = 0
+            if set_bin != "":
+                set_index = int(set_bin, 2)
+            print("SET INDEX", set_index)
+
+            block_found = False
+            block_index = None
+            for j in range(0, num_ways):
+                if tag == cache_tags[set_index][j]:
+                    block_found = True
+                    block_index = j
+                    break
+
+            if block_found:
+                print("HIT")
+            else:
+                print("MISS")
+                # Find index of least recently used block to replace
+                current_set = least_recently_used[set_index]
+                index_of_lru = current_set.index(min(current_set))
+                lru_value = least_recently_used[set_index][index_of_lru]
+                least_recently_used[set_index][index_of_lru] = lru_value + num_ways
+                cache_tags[set_index][index_of_lru] = tag
         print("\n")
+
 
 def cache_sim(addr_mem):
     print("\n")

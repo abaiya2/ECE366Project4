@@ -135,15 +135,16 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
 
             if cache[block_index] == most_sig_bits:
                 print(str(hex(addr_mem[i]) + ": HIT"))
-                hits = hits + 1
-                print("Hit was read from cache block:", (block_index))
 
+                hits = hits + 1
+                print("  -->Data was read from BLOCK:", block_index)
 
             else:
                 print(str(hex(addr_mem[i]) + ": MISS"))
                 cache[block_index] = most_sig_bits
                 misses = misses + 1
-                print("The Range Of Blocks Updated After The Miss: ",hex(block_start), "-", hex(block_start+num_bytes-1))
+                address_range = str(hex(block_start)) + "-" + str(hex(block_start+num_bytes-1))
+                print("  -->Data Addresses: " + address_range + " stored in BLOCK: " + str(block_index))
 
 
         print("\n")
@@ -164,7 +165,7 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         print("Number of Sets: ", num_sets)
         print("Number of Ways: ", num_ways)
         print("Number of Words in Block: ", num_words)
-        print("")
+        print("------Mem Cache Information------")
 
         num_bytes = 4 * num_words
         num_offset_bits = int(math.log(num_bytes, 2))
@@ -186,7 +187,7 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             # print("SET INDEX", set_index)
 
             block_found = False
-            block_index = None
+            block_index = 0
             for j in range(0, num_ways):
                 if tag == cache_tags[set_index][j]:
                     block_found = True
@@ -194,10 +195,11 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                     break
 
             if block_found:
-                # print("HIT")
+                print(str(hex(addr_mem[i]) + ": HIT"))
+                print("  -->Data was read from BLOCK in SET: " + str(set_index) + " , WAY: " + str(block_index))
                 hits = hits + 1
             else:
-                # print("MISS")
+                print(str(hex(addr_mem[i]) + ": MISS"))
                 misses = misses + 1
 
                 # Find index of least recently used block to replace
@@ -206,13 +208,20 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 lru_value = least_recently_used[set_index][index_of_lru]
                 least_recently_used[set_index][index_of_lru] = lru_value + num_ways
                 cache_tags[set_index][index_of_lru] = tag
+                addr_offset_from_start = (addr_mem[i] - 0x2000) % (num_words * 4)
+                block_start = addr_mem[i] - addr_offset_from_start
+                address_range = str(hex(block_start)) + "-" + str(hex(block_start+num_bytes-1))
+                print("  -->Data Addresses " + address_range + " stored in SET: " + str(set_index) + " , WAY: " + str(index_of_lru))
         print("\n")
     print("Mem Access Count: ", len(addr_mem))
     print("Number of Hits:   ", hits)
     print("Number of Misses: ", misses)
+    print("---------------------------------")
+
 
 def cache_sim(addr_mem):
     print("\n")
+    print("MEMORY ADDRESSES ACCESSED")
     for i in range(0, len(addr_mem)):
         hex_num = 0x2000 + (addr_mem[i] * 4)
         addr_mem[i] = hex_num
@@ -430,8 +439,9 @@ def simulator(instr_mem_file_name):
 
     cache_sim(addr_mem)
 
-#simulator("A1.txt")
-simulator("A2.txt")
-#simulator("B1.txt")
-#simulator("B2.txt")
+
+# simulator("A1.txt")
+# simulator("A2.txt")
+# simulator("B1.txt")
+simulator("B2.txt")
 # simulator("i_mem.txt")

@@ -136,10 +136,15 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             if cache[block_index] == most_sig_bits:
                 print(str(hex(addr_mem[i]) + ": HIT"))
                 hits = hits + 1
+                print("Hit was read from cache block:", (block_index))
+
+
             else:
                 print(str(hex(addr_mem[i]) + ": MISS"))
                 cache[block_index] = most_sig_bits
                 misses = misses + 1
+                print("The Range Of Blocks Updated After The Miss: ",hex(block_start), "-", hex(block_start+num_bytes-1))
+
 
         print("\n")
         print("DIRECTLY MAPPED CACHE")
@@ -153,11 +158,13 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         # Number of columns is number of ways
         if num_sets == 1:
             print("FULLY ASSOCIATIVE CACHE")
+
         else:
             print("SET ASSOCIATIVE CACHE")
         print("Number of Sets: ", num_sets)
         print("Number of Ways: ", num_ways)
         print("Number of Words in Block: ", num_words)
+        print("")
 
         num_bytes = 4 * num_words
         num_offset_bits = int(math.log(num_bytes, 2))
@@ -192,6 +199,7 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             else:
                 # print("MISS")
                 misses = misses + 1
+
                 # Find index of least recently used block to replace
                 current_set = least_recently_used[set_index]
                 index_of_lru = current_set.index(min(current_set))

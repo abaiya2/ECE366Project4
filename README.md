@@ -36,7 +36,7 @@
 
 ![](screenshots/cpu_cycle_counts/B1.JPG)
 
-##CACHE HITS AND MISSES
+## CACHE HITS AND MISSES
 ![](screenshots/cache_mem-outputs/B11.JPG)
 
 ![](screenshots/cache_mem-outputs/b12.JPG)
@@ -51,7 +51,7 @@
 
 ![](screenshots/cpu_cycle_counts/B2.JPG)
 
-##CACHE HITS AND MISSES 
+## CACHE HITS AND MISSES 
 ![](screenshots/cache_mem-outputs/B21.JPG)
 
 ![](screenshots/cache_mem-outputs/B22.JPG)

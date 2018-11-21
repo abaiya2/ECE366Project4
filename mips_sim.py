@@ -3,6 +3,10 @@ import math
 print("ECE 366 Project 4: MIPS Simulator")
 
 
+def is_power_two(num):
+    return ((num & num - 1) == 0) and num != 0
+
+
 def decimal_to_bin(dec_num):
     if dec_num < 0:
         pos_value = 0 - dec_num
@@ -438,8 +442,21 @@ def simulator(instr_mem_file_name):
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
     cache_sim(addr_mem)
+    block_size = int(input("Enter the block size:   "))
+    num_ways = int(input("Enter the number of ways: "))
+    num_sets = int(input("Enter the number of sets:  "))
 
+    if not is_power_two(block_size):
+        print("Entered block size is not a power of 2. Defaulting to 2 words")
+        block_size = 2
+    if not is_power_two(num_ways):
+        print("Entered number of ways is not a power of 2. Defaulting to 2 ways")
+        num_ways = 2
+    if not is_power_two(num_sets):
+        print("Entered number of sets is not a power of 2. Defaulting to 2 sets")
+        num_sets = 2
 
+    run_cache_sim_config(block_size, num_ways, num_sets, addr_mem)
 # simulator("A1.txt")
 # simulator("A2.txt")
 # simulator("B1.txt")

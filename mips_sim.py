@@ -117,6 +117,7 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         print("DIRECTLY MAPPED CACHE")
         print("Number of Words in Block: ", num_words)
         print("Number of Blocks:         ", num_sets)
+
         # print("Num Block Bits", num_block_bits)
         # print("Number of offset bits", num_offset_bits)
         for i in range(0, len(addr_mem)):
@@ -141,6 +142,11 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 misses = misses + 1
 
         print("\n")
+        print("DIRECTLY MAPPED CACHE")
+        print("Number of Words in Block: ", num_words)
+        print("Number of Blocks:         ", num_sets)
+
+
     # Set Associative, including Fully Associative
     else:
         # Number of rows is number of Sets
@@ -416,8 +422,8 @@ def simulator(instr_mem_file_name):
 
     cache_sim(addr_mem)
 
-# simulator("A1.txt")
-# simulator("A2.txt")
-# simulator("B1.txt")
-simulator("B2.txt")
+#simulator("A1.txt")
+simulator("A2.txt")
+#simulator("B1.txt")
+#simulator("B2.txt")
 # simulator("i_mem.txt")

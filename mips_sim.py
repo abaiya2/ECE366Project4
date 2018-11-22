@@ -68,6 +68,7 @@ def get_dependent_instruction(mc_hex):
     rs = 0
     source_registers = []
     target_register = 0
+    output = ""
     # R - Type
     if bin_str[0:6] == "000000":
         # *** $rd, $rs, $rt
@@ -76,20 +77,22 @@ def get_dependent_instruction(mc_hex):
         rs = int(bin_str[6:11], 2)
         target_register = rd
         source_registers = [rt, rs]
-        print("*** $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
+        output = ("*** $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
     # ADDI
     elif bin_str[0:6] == "001000":
         # ADDI $rt, $rs, imm
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         source_registers = [rs]
-        target_register = rt
+        target_register  = rt
+        output = "ADDI $" + str(rt) + ", $" + str(rs) + ", IMM"
     # BRANCH
     elif bin_str[0:6] == "000100" or bin_str[0:6] == "000101":
         # B** $rs, $rt, imm
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         source_registers = [rt, rs]
+        output = "B** $" + str(rs) + ", $" + str(rt) + ", IMM"
     # LW
     elif bin_str[0:6] == "100011":
         # LW $rt, imm($rs)
@@ -97,13 +100,15 @@ def get_dependent_instruction(mc_hex):
         rs = int(bin_str[6:11], 2)
         source_registers = [rs]
         target_register = rt
+        output = "LW $" + str(rt) + ", IMM($" + str(rs) + ")"
     # SW
     elif bin_str[0:6] == "101011":
         # SW $rt, imm($rs)
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         source_registers = [rt, rs]
-    return [source_registers, target_register]
+        output = "SW $" + str(rt) + ", IMM($" + str(rs) + ")"
+    return [source_registers, target_register, output]
 
 
 def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
@@ -237,7 +242,50 @@ def cache_sim(addr_mem):
     run_cache_sim_config(2, 2, 4, addr_mem)   #config 3D
 
 
-def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_prev, mc_next):
+def display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd):
+    instr_reg_next = get_dependent_instruction(mc_next)
+    instr_reg_2nd = get_dependent_instruction(mc_2nd)
+    instr_reg_3rd = get_dependent_instruction(mc_3rd)
+    src_reg_next = instr_reg_next[0]
+    src_reg_2nd = instr_reg_2nd[0]
+    src_reg_3rd = instr_reg_3rd[0]
+    output_next = instr_reg_next[2]
+    output_2nd = instr_reg_2nd[2]
+    output_3rd = instr_reg_3rd[2]
+    print("(1st Refers to the next instruction, 2ND to the instruction after that, etc...)")
+    for i in range(0, len(src_reg_next)):
+        if rd == src_reg_next[i]:
+            print("1ST INSTR: " + output_next)
+            print("1st: The next instruction has a HAZARD solved with forwarding")
+            break
+    for i in range(0, len(src_reg_2nd)):
+        if rd == src_reg_2nd[i] and rd != instr_reg_next[1]:
+            print("2ND INSTR : " + output_2nd)
+            print("2nd: The instruction after the next has a HAZARD solved with forwarding")
+            break
+        elif rd == src_reg_2nd[i] and rd == instr_reg_next[1]:
+            print("1ST INSTR : " + output_next)
+            print("2ND INSTR : " + output_2nd)
+            print("2nd: Current target reg is used as a target for next instruction and"
+                  "\n   operand for the instruction below that")
+    for i in range(0, len(src_reg_3rd)):
+        if rd == src_reg_3rd[i] and rd != instr_reg_2nd[1]:
+            print("3RD INSTR : " + output_3rd)
+            print("3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding")
+            break
+        elif rd == src_reg_3rd[i] and rd == instr_reg_2nd[1]:
+            print("2ND INSTR : " + output_2nd)
+            print("3RD INSTR : " + output_3rd)
+            print(
+                "3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th")
+
+
+def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, adjacent_mc_codes):
+    mc_prev = adjacent_mc_codes[0]
+    mc_next = adjacent_mc_codes[1]
+    mc_2nd = adjacent_mc_codes[2]
+    mc_3rd = adjacent_mc_codes[3]
+
     bin_str = hex_to_bin(mc_hex)
     lw_addr = 999999999
     # ADD
@@ -249,6 +297,30 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        instr_reg_next = get_dependent_instruction(mc_next)
+        instr_reg_2nd = get_dependent_instruction(mc_2nd)
+        instr_reg_3rd = get_dependent_instruction(mc_3rd)
+        src_reg_next = instr_reg_next[0]
+        src_reg_2nd = instr_reg_2nd[0]
+        src_reg_3rd = instr_reg_3rd[0]
+        display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
+        # for i in range(0, len(src_reg_next)):
+        #     if rd == src_reg_next[i]:
+        #         print("1st: The next instruction has a HAZARD solved with forwarding")
+        #         break
+        # for i in range(0, len(src_reg_2nd)):
+        #     if rd == src_reg_2nd[i] and rd != instr_reg_next[1]:
+        #         print("2nd: The instruction after the next has a HAZARD solved with forwarding")
+        #         break
+        #     elif rd == src_reg_2nd[i] and rd == instr_reg_next[1]:
+        #         print("2nd: Current target reg is used as a target for next instruction and"
+        #               "\n   operand for the instruction below that")
+        # for i in range(0, len(src_reg_3rd)):
+        #     if rd == src_reg_3rd[i] and rd != instr_reg_2nd[1]:
+        #         print("3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding")
+        #         break
+        #     elif rd == src_reg_3rd[i] and rd == instr_reg_2nd[1]:
+        #         print("3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th")
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
         rd = int(bin_str[16:21], 2)
@@ -376,6 +448,7 @@ def simulator(instr_mem_file_name):
     mc_hex = instr_mem[pc]
     mc_hex_prev = "0xffffffff"
     mc_hex_next = "0xffffffff"
+
     num_multicycle_instr = [0, 0, 0]    # Number of 3, 4, and 5 cycle CPU instructions, respectively
     dic = 0     # Dynamic Instruction Count
     pipe_delays = [0, 0]    # Number of Data Hazards and Control Hazards, respectively
@@ -387,16 +460,37 @@ def simulator(instr_mem_file_name):
             num_multicycle_instr[0] += 1
             break
 
+        mc_hex_2nd_next = "0xffffffff"
+        mc_hex_3rd_next = "0xffffffff"
+
         if index == 0:
             mc_hex_prev = "0xffffffff"
             mc_hex_next = instr_mem[index + 1]
+            mc_hex_2nd_next = instr_mem[index + 2]
+            mc_hex_3rd_next = instr_mem[index + 3]
         elif index == (len(instr_mem) - 2):
             mc_hex_prev = instr_mem[index - 1]
             mc_hex_next = "0xffffffff"
+            mc_hex_2nd_next = "0xffffffff"
+            mc_hex_3rd_next = "0xffffffff"
+        elif index == (len(instr_mem) - 3):
+            mc_hex_prev = instr_mem[index - 1]
+            mc_hex_next = instr_mem[index + 1]
+            mc_hex_2nd_next = "0xffffffff"
+            mc_hex_3rd_next = "0xffffffff"
+        elif index == (len(instr_mem) - 4):
+            mc_hex_prev = instr_mem[index - 1]
+            mc_hex_next = instr_mem[index + 1]
+            mc_hex_2nd_next = instr_mem[index + 2]
+            mc_hex_3rd_next = "0xffffffff"
         else:
             mc_hex_prev = instr_mem[index - 1]
             mc_hex_next = instr_mem[index + 1]
-        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, mc_hex_prev, mc_hex_next)
+            mc_hex_2nd_next = instr_mem[index + 2]
+            mc_hex_3rd_next = instr_mem[index + 3]
+
+        adjacent_mc_codes = [mc_hex_prev, mc_hex_next, mc_hex_2nd_next, mc_hex_3rd_next]
+        data_set = execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, adjacent_mc_codes)
         data_mem = data_set[0]
         reg_arr = data_set[1]
         pc = data_set[2]
@@ -406,32 +500,34 @@ def simulator(instr_mem_file_name):
         if lw_addr_index != 999999999:
             addr_mem.append(data_set[5])
 
-        print("INDEX:          ", index)
-        print("CURR INSTRUCTION", mc_hex)
-        print("PREV INSTRUCTION", mc_hex_prev)
-        print("NEXT INSTRUCTION", mc_hex_next)
-        print(instr_mem_file_name)
+        # print("INDEX:          ", index)
+        # print("CURR INSTRUCTION", mc_hex)
+        # print("PREV INSTRUCTION", mc_hex_prev)
+        # print("NEXT INSTRUCTION", mc_hex_next)
         print_output(reg_arr, pc)
-        print("Data Mem:", data_mem[0:10], "\n")
-        
+        print("----------NEXT INSTRUCTION----------")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
         dic += 1
 
+    print("\nFinal Output of Registers")
+    print(instr_mem_file_name)
+    print_output(reg_arr, pc)
+    print("---------CPU INFORMATION----------")
     num_3_cycle = num_multicycle_instr[0]
     num_4_cycle = num_multicycle_instr[1]
     num_5_cycle = num_multicycle_instr[2]
     multi_cycle_count = (3 * num_3_cycle) + (4 * num_4_cycle) + (5 * num_5_cycle)
     print("SINGLE-CYCLE CPU INFORMATION:")
     print("DIC/Number  of Cycles   ", dic)
-    print("\n")
+    print("----------------------------------")
 
     print("MULTI-CYCLE CPU INFORMATION:")
     print("Num of 3 Cycle Instructions: ", num_3_cycle)
     print("Num of 4 Cycle Instructions: ", num_4_cycle)
     print("Num of 5 Cycle Instructions: ", num_5_cycle)
     print("Total Number of Cycles:      ", multi_cycle_count)
-    print("\n")
+    print("----------------------------------")
 
     data_haz_delays = pipe_delays[0]
     ctrl_haz_delays = pipe_delays[1]
@@ -441,7 +537,7 @@ def simulator(instr_mem_file_name):
     print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
-    cache_sim(addr_mem)
+    # cache_sim(addr_mem)
     block_size = int(input("Enter the block size:   "))
     num_ways = int(input("Enter the number of ways: "))
     num_sets = int(input("Enter the number of sets:  "))

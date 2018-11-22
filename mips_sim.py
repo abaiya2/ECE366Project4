@@ -297,30 +297,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
-        instr_reg_next = get_dependent_instruction(mc_next)
-        instr_reg_2nd = get_dependent_instruction(mc_2nd)
-        instr_reg_3rd = get_dependent_instruction(mc_3rd)
-        src_reg_next = instr_reg_next[0]
-        src_reg_2nd = instr_reg_2nd[0]
-        src_reg_3rd = instr_reg_3rd[0]
         display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
-        # for i in range(0, len(src_reg_next)):
-        #     if rd == src_reg_next[i]:
-        #         print("1st: The next instruction has a HAZARD solved with forwarding")
-        #         break
-        # for i in range(0, len(src_reg_2nd)):
-        #     if rd == src_reg_2nd[i] and rd != instr_reg_next[1]:
-        #         print("2nd: The instruction after the next has a HAZARD solved with forwarding")
-        #         break
-        #     elif rd == src_reg_2nd[i] and rd == instr_reg_next[1]:
-        #         print("2nd: Current target reg is used as a target for next instruction and"
-        #               "\n   operand for the instruction below that")
-        # for i in range(0, len(src_reg_3rd)):
-        #     if rd == src_reg_3rd[i] and rd != instr_reg_2nd[1]:
-        #         print("3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding")
-        #         break
-        #     elif rd == src_reg_3rd[i] and rd == instr_reg_2nd[1]:
-        #         print("3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th")
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
         rd = int(bin_str[16:21], 2)
@@ -330,6 +307,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         reg_arr[rd] = reg_arr[rs] - reg_arr[rt]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # XOR
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
         rd = int(bin_str[16:21], 2)
@@ -339,6 +317,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         reg_arr[rd] = reg_arr[rt] ^ reg_arr[rs]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # ADDI
     elif bin_str[0:6] == "001000":
         rt = int(bin_str[11:16], 2)
@@ -349,6 +328,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         reg_arr[rt] = reg_arr[rs] + imm
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        display_forwarding_uses(rt, mc_next, mc_2nd, mc_3rd)
     # BEQ
     elif bin_str[0:6] == "000100":
         rt = int(bin_str[11:16], 2)
@@ -397,6 +377,7 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
             reg_arr[rd] = 0
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # LW
     elif bin_str[0:6] == "100011":
         rt = int(bin_str[11:16], 2)
@@ -419,7 +400,6 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
             if cur_src_reg == rt:
                 print("A DELAY WILL BE REQUIRED FOR LW")
                 pipe_delays[0] += 1
-
     # SW
     elif bin_str[0:6] == "101011":
         rt = int(bin_str[11:16], 2)

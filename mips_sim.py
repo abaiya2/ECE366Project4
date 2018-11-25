@@ -1,6 +1,14 @@
 import math
 
 print("ECE 366 Project 4: MIPS Simulator")
+file_name = "A1.txt"
+# file_name = "A2.txt"
+# file_name = "B1.txt"
+# file_name = "B2.txt"
+
+output_text_file_name = "p4_output_imem_" + file_name
+print("OUTPUT FILE NAME: ", output_text_file_name)
+output_file = open(output_text_file_name, "w")
 
 
 def is_power_two(num):
@@ -157,10 +165,6 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
 
 
         print("\n")
-        print("DIRECTLY MAPPED CACHE")
-        print("Number of Words in Block: ", num_words)
-        print("Number of Blocks:         ", num_sets)
-
 
     # Set Associative, including Fully Associative
     else:
@@ -479,7 +483,6 @@ def simulator(instr_mem_file_name):
         lw_addr_index = data_set[5]
         if lw_addr_index != 999999999:
             addr_mem.append(data_set[5])
-
         # print("INDEX:          ", index)
         # print("CURR INSTRUCTION", mc_hex)
         # print("PREV INSTRUCTION", mc_hex_prev)
@@ -517,7 +520,7 @@ def simulator(instr_mem_file_name):
     print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
     print("Total Number of Cycles:    ", pipeline_cycle_count)
 
-    # cache_sim(addr_mem)
+    cache_sim(addr_mem)
     block_size = int(input("Enter the block size:   "))
     num_ways = int(input("Enter the number of ways: "))
     num_sets = int(input("Enter the number of sets:  "))
@@ -533,8 +536,13 @@ def simulator(instr_mem_file_name):
         num_sets = 2
 
     run_cache_sim_config(block_size, num_ways, num_sets, addr_mem)
-# simulator("A1.txt")
+
+
+
+simulator(file_name)
+
 # simulator("A2.txt")
 # simulator("B1.txt")
-simulator("B2.txt")
+# simulator("B2.txt")
 # simulator("i_mem.txt")
+output_file.close()

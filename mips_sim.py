@@ -1,9 +1,9 @@
 import math
 
 print("ECE 366 Project 4: MIPS Simulator")
-file_name = "A1.txt"
+#file_name = "A1.txt"
 # file_name = "A2.txt"
-# file_name = "B1.txt"
+file_name = "B1.txt"
 # file_name = "B2.txt"
 
 output_text_file_name = "p4_output_imem_" + file_name
@@ -64,9 +64,11 @@ def file_to_array(file):
 
 
 def print_output(reg_arr, pc):
-    print("PC: ", pc)
+    print("PC: ", str(pc))
+    output_file.write("PC: " + str(pc) + "\n")
     for i in range(1, 8):
-        print("$" + str(i) + ": ", reg_arr[i])
+        print("$" + str(i) + ": ", str(reg_arr[i]))
+        output_file.write("$" + str(i) + ": " + str(reg_arr[i]) + "\n")
 
 
 def get_dependent_instruction(mc_hex):
@@ -134,6 +136,9 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         print("DIRECTLY MAPPED CACHE")
         print("Number of Words in Block: ", num_words)
         print("Number of Blocks:         ", num_sets)
+        output_file.write("DIRECTLY MAPPED CACHE" + "\n")
+        output_file.write("Number of Words in Block: " + str(num_words) + "\n")
+        output_file.write("Number of Blocks:         " + str(num_sets) + "\n")
 
         # print("Num Block Bits", num_block_bits)
         # print("Number of offset bits", num_offset_bits)
@@ -152,26 +157,30 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
 
             if cache[block_index] == most_sig_bits:
                 print(str(hex(addr_mem[i]) + ": HIT"))
+                output_file.write(str(hex(addr_mem[i]) + ": HIT") + "\n")
 
                 hits = hits + 1
                 print("  -->Data was read from BLOCK:", block_index)
+                output_file.write("  -->Data was read from BLOCK:" + str(block_index) + "\n")
 
             else:
                 print(str(hex(addr_mem[i]) + ": MISS"))
+                output_file.write(str(hex(addr_mem[i]) + ": MISS") + "\n")
                 cache[block_index] = most_sig_bits
                 misses = misses + 1
                 address_range = str(hex(block_start)) + "-" + str(hex(block_start+num_bytes-1))
                 print("  -->Data Addresses: " + address_range + " stored in BLOCK: " + str(block_index))
-
+                output_file.write("  -->Data Addresses: " + address_range + " stored in BLOCK: " + str(block_index) + "\n")
 
         print("\n")
-
+        output_file.write("\n")
     # Set Associative, including Fully Associative
     else:
         # Number of rows is number of Sets
         # Number of columns is number of ways
         if num_sets == 1:
             print("FULLY ASSOCIATIVE CACHE")
+            output_file.write("FULLY ASSOCIATIVE CACHE" + "\n")
 
         else:
             print("SET ASSOCIATIVE CACHE")
@@ -179,6 +188,11 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         print("Number of Ways: ", num_ways)
         print("Number of Words in Block: ", num_words)
         print("------Mem Cache Information------")
+        output_file.write("SET ASSOCIATIVE CACHE" + "\n")
+        output_file.write("Number of Sets: " + str(num_sets) + "\n")
+        output_file.write("Number of Ways: " + str(num_ways) + "\n")
+        output_file.write("Number of Words in Block: " + str(num_words) + "\n")
+        output_file.write("------Mem Cache Information------" + "\n")
 
         num_bytes = 4 * num_words
         num_offset_bits = int(math.log(num_bytes, 2))
@@ -209,10 +223,13 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
 
             if block_found:
                 print(str(hex(addr_mem[i]) + ": HIT"))
+                output_file.write(str(hex(addr_mem[i]) + ": HIT") + "\n")
                 print("  -->Data was read from BLOCK in SET: " + str(set_index) + " , WAY: " + str(block_index))
+                output_file.write("  -->Data was read from BLOCK in SET: " + str(set_index) + " , WAY: " + str(block_index) + "\n")
                 hits = hits + 1
             else:
                 print(str(hex(addr_mem[i]) + ": MISS"))
+                output_file.write(str(hex(addr_mem[i]) + ": MISS") + "\n")
                 misses = misses + 1
 
                 # Find index of least recently used block to replace
@@ -225,21 +242,32 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 block_start = addr_mem[i] - addr_offset_from_start
                 address_range = str(hex(block_start)) + "-" + str(hex(block_start+num_bytes-1))
                 print("  -->Data Addresses " + address_range + " stored in SET: " + str(set_index) + " , WAY: " + str(index_of_lru))
+                output_file.write("  -->Data Addresses " + address_range + " stored in SET: " + str(set_index) + " , WAY: " + str(index_of_lru) + "\n")
         print("\n")
+        output_file.write("\n")
+
     print("Mem Access Count: ", len(addr_mem))
     print("Number of Hits:   ", hits)
     print("Number of Misses: ", misses)
     print("---------------------------------")
+    output_file.write("Mem Access Count: " + str(len(addr_mem)) + "\n")
+    output_file.write("Number of Hits:   " + str(hits) + "\n")
+    output_file.write("Number of Misses: " + str(misses) + "\n")
+    output_file.write("---------------------------------")
 
 
 def cache_sim(addr_mem):
     print("\n")
+    output_file.write("\n")
     print("MEMORY ADDRESSES ACCESSED")
+    output_file.write("MEMORY ADDRESSES ACCESSED" + "\n")
     for i in range(0, len(addr_mem)):
         hex_num = 0x2000 + (addr_mem[i] * 4)
         addr_mem[i] = hex_num
         print(hex(addr_mem[i]))
+        output_file.write(hex(addr_mem[i]) + "\n")
     print("\n")
+    output_file.write("\n")
     run_cache_sim_config(4, 1, 2, addr_mem)   #config 3A
     run_cache_sim_config(2, 1, 4, addr_mem)   #config 3B
     run_cache_sim_config(2, 4, 1, addr_mem)   #config 3C
@@ -257,32 +285,47 @@ def display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd):
     output_2nd = instr_reg_2nd[2]
     output_3rd = instr_reg_3rd[2]
     print("(1st Refers to the next instruction, 2ND to the instruction after that, etc...)")
+    output_file.write("(1st Refers to the next instruction, 2ND to the instruction after that, etc...)" + "\n")
     for i in range(0, len(src_reg_next)):
         if rd == src_reg_next[i]:
             print("1ST INSTR: " + output_next)
+            output_file.write("1ST INSTR: " + output_next + "\n")
             print("1st: The next instruction has a HAZARD solved with forwarding")
+            output_file.write("1st: The next instruction has a HAZARD solved with forwarding" + "\n")
             break
     for i in range(0, len(src_reg_2nd)):
         if rd == src_reg_2nd[i] and rd != instr_reg_next[1]:
             print("2ND INSTR : " + output_2nd)
+            output_file.write("2ND INSTR : " + output_2nd + "\n")
             print("2nd: The instruction after the next has a HAZARD solved with forwarding")
+            output_file.write("2nd: The instruction after the next has a HAZARD solved with forwarding" + "\n")
             break
         elif rd == src_reg_2nd[i] and rd == instr_reg_next[1]:
             print("1ST INSTR : " + output_next)
+            output_file.write("1ST INSTR : " + output_next + "\n")
             print("2ND INSTR : " + output_2nd)
+            output_file.write("2ND INSTR : " + output_2nd + "\n")
             print("2nd: Current target reg is used as a target for next instruction and"
                   "\n   operand for the instruction below that")
+            output_file.write("2nd: Current target reg is used as a target for next instruction and"
+                  "\n   operand for the instruction below that" + "\n")
+
     for i in range(0, len(src_reg_3rd)):
         if rd == src_reg_3rd[i] and rd != instr_reg_2nd[1]:
             print("3RD INSTR : " + output_3rd)
+            output_file.write("3RD INSTR : " + output_3rd)
             print("3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding")
+            output_file.write("3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding" + "\n")
             break
         elif rd == src_reg_3rd[i] and rd == instr_reg_2nd[1]:
             print("2ND INSTR : " + output_2nd)
             print("3RD INSTR : " + output_3rd)
             print(
                 "3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th")
-
+            output_file.write("2ND INSTR : " + output_2nd + "\n")
+            output_file.write("3RD INSTR : " + output_3rd + "\n")
+            output_file.write(
+                "3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th" + "\n")
 
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, adjacent_mc_codes):
     mc_prev = adjacent_mc_codes[0]
@@ -298,9 +341,12 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         print("ADD $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
+        output_file.write("ADD $" + str(rd) + ", $" + str(rs) + ", $" + str(rt) + "\n")
         reg_arr[rd] = reg_arr[rs] + reg_arr[rt]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        output_file.write("Multi-Cycle Count: 4 Cycles" + "\n")
+
         display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # SUB
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000100010":
@@ -308,9 +354,11 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         print("SUB $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
+        output_file.write("SUB $" + str(rd) + ", $" + str(rs) + ", $" + str(rt) + "\n")
         reg_arr[rd] = reg_arr[rs] - reg_arr[rt]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        output_file.write("Multi-Cycle Count: 4 Cycles" + "\n")
         display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # XOR
     elif bin_str[0:6] == "000000" and bin_str[26:32] == "100110":
@@ -318,9 +366,11 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         print("XOR $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
+        output_file.write("XOR $" + str(rd) + ", $" + str(rs) + ", $" + str(rt) + "\n")
         reg_arr[rd] = reg_arr[rt] ^ reg_arr[rs]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        output_file.write("Multi-Cycle Count: 4 Cycles" + "\n")
         display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # ADDI
     elif bin_str[0:6] == "001000":
@@ -329,9 +379,11 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("ADDI $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
+        output_file.write("ADDI $" + str(rt) + ", $" + str(rs) + ", " + str(imm) + "\n")
         reg_arr[rt] = reg_arr[rs] + imm
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        output_file.write("Multi-Cycle Count: 4 Cycles" + "\n")
         display_forwarding_uses(rt, mc_next, mc_2nd, mc_3rd)
     # BEQ
     elif bin_str[0:6] == "000100":
@@ -340,16 +392,20 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("BEQ $" + str(rs) + ", $" + str(rt) + ", " + str(imm))
+        output_file.write("BEQ $" + str(rs) + ", $" + str(rt) + ", " + str(imm) + "\n")
         if reg_arr[rt] == reg_arr[rs]:
             pc += (imm * 4)
             print("A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR")
+            output_file.write("A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR" + "\n")
             pipe_delays[1] += 1
         num_multicycle_instr[0] += 1
         print("Multi-Cycle Count: 3 Cycles")
+        output_file.write("Multi-Cycle Count: 3 Cycles" + "\n")
         data_registers = get_dependent_instruction(mc_prev)
         target_register = data_registers[1]
         if target_register == rt or target_register == rs:
             print("A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND")
+            output_file.write("A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND" + "\n")
             pipe_delays[0] += 1
     # BNE
     elif bin_str[0:6] == "000101":
@@ -358,16 +414,20 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("BNE $" + str(rt) + ", $" + str(rs) + ", " + str(imm))
+        output_file.write("BNE $" + str(rt) + ", $" + str(rs) + ", " + str(imm) + "\n")
         if reg_arr[rt] != reg_arr[rs]:
             pc += (imm * 4)
             print("A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR")
+            output_file.write("A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR" + "\n")
             pipe_delays[1] += 1
         num_multicycle_instr[0] += 1
         print("Multi-Cycle Count: 3 Cycles")
+        output_file.write("Multi-Cycle Count: 3 Cycles" + "\n")
         data_registers = get_dependent_instruction(mc_prev)
         target_register = data_registers[1]
         if target_register == rt or target_register == rs:
             print("A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND")
+            output_file.write("A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND" + "\n")
             pipe_delays[0] += 1
     # SLT
     elif bin_str[0:6] == "000000" and bin_str[21:32] == "00000101010":
@@ -375,12 +435,14 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         rt = int(bin_str[11:16], 2)
         rs = int(bin_str[6:11], 2)
         print("SLT $" + str(rd) + ", $" + str(rs) + ", $" + str(rt))
+        output_file.write("SLT $" + str(rd) + ", $" + str(rs) + ", $" + str(rt) + "\n")
         if reg_arr[rs] < reg_arr[rt]:
             reg_arr[rd] = 1
         else:
             reg_arr[rd] = 0
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        output_file.write("Multi-Cycle Count: 4 Cycles" + "\n")
         display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd)
     # LW
     elif bin_str[0:6] == "100011":
@@ -389,20 +451,26 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("LW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
+        output_file.write("LW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")" + "\n")
+
         d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
         d_mem_value = data_mem[d_mem_index]
         print("MEM INDEX FOR LW", d_mem_index)
+        output_file.write("MEM INDEX FOR LW" + str(d_mem_index) + "\n")
         reg_arr[rt] = d_mem_value
         num_multicycle_instr[2] += 1
         print("Multi-Cycle Count: 5 Cycles")
+        output_file.write("Multi-Cycle Count: 5 Cycles" + "\n")
         lw_addr= d_mem_index
         data_registers = get_dependent_instruction(mc_next)
         source_registers = data_registers[0]
         for i in range(0, len(source_registers)):
             cur_src_reg = source_registers[i]
             print("SOURCE REG: ", source_registers[i])
+            output_file.write("SOURCE REG: " + str(source_registers[i]) + "\n")
             if cur_src_reg == rt:
                 print("A DELAY WILL BE REQUIRED FOR LW")
+                output_file.write("A DELAY WILL BE REQUIRED FOR LW" + "\n")
                 pipe_delays[0] += 1
     # SW
     elif bin_str[0:6] == "101011":
@@ -411,10 +479,12 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
         imm_bin = bin_str[16:32]
         imm = bin_to_decimal(imm_bin)
         print("SW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")")
+        output_file.write("SW $" + str(rt) + ", " + str(imm) + "($" + str(rs) + ")" + "\n")
         d_mem_index = int((reg_arr[rs] - 0x2000 + imm) / 4)
         data_mem[d_mem_index] = reg_arr[rt]
         num_multicycle_instr[1] += 1
         print("Multi-Cycle Count: 4 Cycles")
+        output_file.write("Multi-Cycle Count: 4 Cycles" + "\n")
     pc += 4
 
     return [data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, lw_addr]
@@ -488,15 +558,22 @@ def simulator(instr_mem_file_name):
         # print("PREV INSTRUCTION", mc_hex_prev)
         # print("NEXT INSTRUCTION", mc_hex_next)
         print_output(reg_arr, pc)
+        #output_file.write(reg_arr, pc)
         print("----------NEXT INSTRUCTION----------")
+        output_file.write("----------NEXT INSTRUCTION----------" + "\n")
         index = int(pc / 4)
         mc_hex = instr_mem[index]
         dic += 1
 
     print("\nFinal Output of Registers")
+    output_file.write("\nFinal Output of Registers" + "\n")
     print(instr_mem_file_name)
+    output_file.write(instr_mem_file_name + "\n")
     print_output(reg_arr, pc)
+    #output_file.write(reg_arr, pc)
+
     print("---------CPU INFORMATION----------")
+    output_file.write("---------CPU INFORMATION----------" + "\n")
     num_3_cycle = num_multicycle_instr[0]
     num_4_cycle = num_multicycle_instr[1]
     num_5_cycle = num_multicycle_instr[2]
@@ -512,6 +589,17 @@ def simulator(instr_mem_file_name):
     print("Total Number of Cycles:      ", multi_cycle_count)
     print("----------------------------------")
 
+    output_file.write("SINGLE-CYCLE CPU INFORMATION:" + "\n")
+    output_file.write("DIC/Number  of Cycles   " + str(dic) + "\n")
+    output_file.write("----------------------------------" + "\n")
+
+    output_file.write("MULTI-CYCLE CPU INFORMATION:" + "\n")
+    output_file.write("Num of 3 Cycle Instructions: " + str(num_3_cycle) + "\n")
+    output_file.write("Num of 4 Cycle Instructions: " + str(num_4_cycle) + "\n")
+    output_file.write("Num of 5 Cycle Instructions: " + str(num_5_cycle) + "\n")
+    output_file.write("Total Number of Cycles:      " + str(multi_cycle_count) + "\n")
+    output_file.write("----------------------------------" + "\n")
+
     data_haz_delays = pipe_delays[0]
     ctrl_haz_delays = pipe_delays[1]
     pipeline_cycle_count = dic + 4 + data_haz_delays + ctrl_haz_delays
@@ -519,6 +607,11 @@ def simulator(instr_mem_file_name):
     print("Num of Data Hazard Delays: ", data_haz_delays)
     print("Num of Ctrl Hazard Delays: ", ctrl_haz_delays)
     print("Total Number of Cycles:    ", pipeline_cycle_count)
+
+    output_file.write("PIPELINED CPU INFORMATION:" + "\n")
+    output_file.write("Num of Data Hazard Delays: " + str(data_haz_delays) + "\n")
+    output_file.write("Num of Ctrl Hazard Delays: " + str(ctrl_haz_delays) + "\n")
+    output_file.write("Total Number of Cycles:    " + str(pipeline_cycle_count) + "\n")
 
     cache_sim(addr_mem)
     block_size = int(input("Enter the block size:   "))
@@ -540,8 +633,7 @@ def simulator(instr_mem_file_name):
 
 
 simulator(file_name)
-
-# simulator("A2.txt")
+#simulator("A2.txt")
 # simulator("B1.txt")
 # simulator("B2.txt")
 # simulator("i_mem.txt")

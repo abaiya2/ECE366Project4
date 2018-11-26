@@ -1,0 +1,1398 @@
+ADDI $1, $0, 2
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+2ND INSTR : SW $1, IMM($2)
+2nd: The instruction after the next has a HAZARD solved with forwarding
+PC: 4
+$1: 2
+$2: 0
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $0, 28
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: SW $1, IMM($2)
+1st: The next instruction has a HAZARD solved with forwarding
+2ND INSTR : ADDI $2, $2, IMM
+2nd: The instruction after the next has a HAZARD solved with forwarding
+2ND INSTR : ADDI $2, $2, IMM
+3RD INSTR : B** $2, $0, IMM
+3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th
+PC: 8
+$1: 2
+$2: 28
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: 2
+$2: 28
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: 2
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 20
+$1: 2
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $1, $1, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: *** $1, $0, $1
+1st: The next instruction has a HAZARD solved with forwarding
+1ST INSTR : *** $1, $0, $1
+2ND INSTR : ADDI $1, $1, IMM
+2nd: Current target reg is used as a target for next instruction and
+   operand for the instruction below that
+PC: 24
+$1: 4
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SUB $1, $0, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: ADDI $1, $1, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 28
+$1: -4
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $1, $1, 3
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 32
+$1: -1
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $3, -7
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+PC: 8
+$1: -1
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: -1
+$2: 24
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: -1
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 20
+$1: -1
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $1, $1, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: *** $1, $0, $1
+1st: The next instruction has a HAZARD solved with forwarding
+1ST INSTR : *** $1, $0, $1
+2ND INSTR : ADDI $1, $1, IMM
+2nd: Current target reg is used as a target for next instruction and
+   operand for the instruction below that
+PC: 24
+$1: -2
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SUB $1, $0, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: ADDI $1, $1, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 28
+$1: 2
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $1, $1, 3
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 32
+$1: 5
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $3, -7
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+PC: 8
+$1: 5
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: 5
+$2: 20
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: 5
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 20
+$1: 5
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $1, $1, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: *** $1, $0, $1
+1st: The next instruction has a HAZARD solved with forwarding
+1ST INSTR : *** $1, $0, $1
+2ND INSTR : ADDI $1, $1, IMM
+2nd: Current target reg is used as a target for next instruction and
+   operand for the instruction below that
+PC: 24
+$1: 10
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SUB $1, $0, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: ADDI $1, $1, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 28
+$1: -10
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $1, $1, 3
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 32
+$1: -7
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $3, -7
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+PC: 8
+$1: -7
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: -7
+$2: 16
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: -7
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 20
+$1: -7
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $1, $1, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: *** $1, $0, $1
+1st: The next instruction has a HAZARD solved with forwarding
+1ST INSTR : *** $1, $0, $1
+2ND INSTR : ADDI $1, $1, IMM
+2nd: Current target reg is used as a target for next instruction and
+   operand for the instruction below that
+PC: 24
+$1: -14
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SUB $1, $0, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: ADDI $1, $1, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 28
+$1: 14
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $1, $1, 3
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 32
+$1: 17
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $3, -7
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+PC: 8
+$1: 17
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: 17
+$2: 12
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: 17
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 20
+$1: 17
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $1, $1, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: *** $1, $0, $1
+1st: The next instruction has a HAZARD solved with forwarding
+1ST INSTR : *** $1, $0, $1
+2ND INSTR : ADDI $1, $1, IMM
+2nd: Current target reg is used as a target for next instruction and
+   operand for the instruction below that
+PC: 24
+$1: 34
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SUB $1, $0, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: ADDI $1, $1, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 28
+$1: -34
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $1, $1, 3
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 32
+$1: -31
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $3, -7
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+PC: 8
+$1: -31
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: -31
+$2: 8
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: -31
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 20
+$1: -31
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $1, $1, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: *** $1, $0, $1
+1st: The next instruction has a HAZARD solved with forwarding
+1ST INSTR : *** $1, $0, $1
+2ND INSTR : ADDI $1, $1, IMM
+2nd: Current target reg is used as a target for next instruction and
+   operand for the instruction below that
+PC: 24
+$1: -62
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SUB $1, $0, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: ADDI $1, $1, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 28
+$1: 62
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $1, $1, 3
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 32
+$1: 65
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $3, -7
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+PC: 8
+$1: 65
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $1, 8192($2)
+Multi-Cycle Count: 4 Cycles
+PC: 12
+$1: 65
+$2: 4
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, -4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 16
+$1: 65
+$2: 0
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $2, $0, 4
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 36
+$1: 65
+$2: 0
+$3: 0
+$4: 0
+$5: 0
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $5, $0, 32
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+PC: 40
+$1: 65
+$2: 0
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW0
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: 0
+$2: 0
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: 0
+$2: 0
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 56
+$1: 0
+$2: 0
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: 0
+$2: 4
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: 0
+$2: 4
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW1
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: 65
+$2: 4
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: 65
+$2: 4
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 56
+$1: 65
+$2: 4
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: 65
+$2: 8
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: 65
+$2: 8
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW2
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: -31
+$2: 8
+$3: 0
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: -31
+$2: 8
+$3: 1
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 52
+$1: -31
+$2: 8
+$3: 1
+$4: 0
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $4, $4, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+3RD INSTR : SW $4, IMM($0)3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding
+PC: 56
+$1: -31
+$2: 8
+$3: 1
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: -31
+$2: 12
+$3: 1
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: -31
+$2: 12
+$3: 1
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW3
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: 17
+$2: 12
+$3: 1
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: 17
+$2: 12
+$3: 0
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 56
+$1: 17
+$2: 12
+$3: 0
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: 17
+$2: 16
+$3: 0
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: 17
+$2: 16
+$3: 0
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW4
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: -7
+$2: 16
+$3: 0
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: -7
+$2: 16
+$3: 1
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 52
+$1: -7
+$2: 16
+$3: 1
+$4: -31
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $4, $4, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+3RD INSTR : SW $4, IMM($0)3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding
+PC: 56
+$1: -7
+$2: 16
+$3: 1
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: -7
+$2: 20
+$3: 1
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: -7
+$2: 20
+$3: 1
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW5
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: 5
+$2: 20
+$3: 1
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: 5
+$2: 20
+$3: 0
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 56
+$1: 5
+$2: 20
+$3: 0
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: 5
+$2: 24
+$3: 0
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: 5
+$2: 24
+$3: 0
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW6
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: -1
+$2: 24
+$3: 0
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: -1
+$2: 24
+$3: 1
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 52
+$1: -1
+$2: 24
+$3: 1
+$4: -38
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $4, $4, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+3RD INSTR : SW $4, IMM($0)3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding
+PC: 56
+$1: -1
+$2: 24
+$3: 1
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: -1
+$2: 28
+$3: 1
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: -1
+$2: 28
+$3: 1
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW7
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: 2
+$2: 28
+$3: 1
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: 2
+$2: 28
+$3: 0
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BEQ $3, $0, 1
+A STALL IS NEEDED FOR BEQ TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BEQ, WHICH NEEDS AN OPERAND
+PC: 56
+$1: 2
+$2: 28
+$3: 0
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: 2
+$2: 32
+$3: 0
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 64
+$1: 2
+$2: 32
+$3: 0
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $4, 8192($0)
+Multi-Cycle Count: 4 Cycles
+PC: 68
+$1: 2
+$2: 32
+$3: 0
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+
+Final Output of Registers
+A1.txt
+PC: 68
+$1: 2
+$2: 32
+$3: 0
+$4: -39
+$5: 32
+$6: 0
+$7: 0
+---------CPU INFORMATION----------
+SINGLE-CYCLE CPU INFORMATION:
+DIC/Number  of Cycles   93
+----------------------------------
+MULTI-CYCLE CPU INFORMATION:
+Num of 3 Cycle Instructions: 30
+Num of 4 Cycle Instructions: 55
+Num of 5 Cycle Instructions: 8
+Total Number of Cycles:      350
+----------------------------------
+PIPELINED CPU INFORMATION:
+Num of Data Hazard Delays: 31
+Num of Ctrl Hazard Delays: 19
+Total Number of Cycles:    147
+
+MEMORY ADDRESSES ACCESSED
+0x2000
+0x2004
+0x2008
+0x200c
+0x2010
+0x2014
+0x2018
+0x201c
+
+DIRECTLY MAPPED CACHE
+Number of Words in Block: 4
+Number of Blocks:         2
+0x2000: MISS
+  -->Data Addresses: 0x2000-0x200f stored in BLOCK: 0
+0x2004: HIT
+  -->Data was read from BLOCK:0
+0x2008: HIT
+  -->Data was read from BLOCK:0
+0x200c: HIT
+  -->Data was read from BLOCK:0
+0x2010: MISS
+  -->Data Addresses: 0x2010-0x201f stored in BLOCK: 1
+0x2014: HIT
+  -->Data was read from BLOCK:1
+0x2018: HIT
+  -->Data was read from BLOCK:1
+0x201c: HIT
+  -->Data was read from BLOCK:1
+
+Mem Access Count: 8
+Number of Hits:   6
+Number of Misses: 2
+---------------------------------DIRECTLY MAPPED CACHE
+Number of Words in Block: 2
+Number of Blocks:         4
+0x2000: MISS
+  -->Data Addresses: 0x2000-0x2007 stored in BLOCK: 0
+0x2004: HIT
+  -->Data was read from BLOCK:0
+0x2008: MISS
+  -->Data Addresses: 0x2008-0x200f stored in BLOCK: 1
+0x200c: HIT
+  -->Data was read from BLOCK:1
+0x2010: MISS
+  -->Data Addresses: 0x2010-0x2017 stored in BLOCK: 2
+0x2014: HIT
+  -->Data was read from BLOCK:2
+0x2018: MISS
+  -->Data Addresses: 0x2018-0x201f stored in BLOCK: 3
+0x201c: HIT
+  -->Data was read from BLOCK:3
+
+Mem Access Count: 8
+Number of Hits:   4
+Number of Misses: 4
+---------------------------------FULLY ASSOCIATIVE CACHE
+SET ASSOCIATIVE CACHE
+Number of Sets: 1
+Number of Ways: 4
+Number of Words in Block: 2
+------Mem Cache Information------
+0x2000: MISS
+  -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
+0x2004: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+0x2008: MISS
+  -->Data Addresses 0x2008-0x200f stored in SET: 0 , WAY: 1
+0x200c: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 1
+0x2010: MISS
+  -->Data Addresses 0x2010-0x2017 stored in SET: 0 , WAY: 2
+0x2014: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 2
+0x2018: MISS
+  -->Data Addresses 0x2018-0x201f stored in SET: 0 , WAY: 3
+0x201c: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 3
+
+Mem Access Count: 8
+Number of Hits:   4
+Number of Misses: 4
+---------------------------------SET ASSOCIATIVE CACHE
+Number of Sets: 4
+Number of Ways: 2
+Number of Words in Block: 2
+------Mem Cache Information------
+0x2000: MISS
+  -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
+0x2004: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+0x2008: MISS
+  -->Data Addresses 0x2008-0x200f stored in SET: 1 , WAY: 0
+0x200c: HIT
+  -->Data was read from BLOCK in SET: 1 , WAY: 0
+0x2010: MISS
+  -->Data Addresses 0x2010-0x2017 stored in SET: 2 , WAY: 0
+0x2014: HIT
+  -->Data was read from BLOCK in SET: 2 , WAY: 0
+0x2018: MISS
+  -->Data Addresses 0x2018-0x201f stored in SET: 3 , WAY: 0
+0x201c: HIT
+  -->Data was read from BLOCK in SET: 3 , WAY: 0
+
+Mem Access Count: 8
+Number of Hits:   4
+Number of Misses: 4
+---------------------------------SET ASSOCIATIVE CACHE
+Number of Sets: 2
+Number of Ways: 4
+Number of Words in Block: 2
+------Mem Cache Information------
+0x2000: MISS
+  -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
+0x2004: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+0x2008: MISS
+  -->Data Addresses 0x2008-0x200f stored in SET: 1 , WAY: 0
+0x200c: HIT
+  -->Data was read from BLOCK in SET: 1 , WAY: 0
+0x2010: MISS
+  -->Data Addresses 0x2010-0x2017 stored in SET: 0 , WAY: 1
+0x2014: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 1
+0x2018: MISS
+  -->Data Addresses 0x2018-0x201f stored in SET: 1 , WAY: 1
+0x201c: HIT
+  -->Data was read from BLOCK in SET: 1 , WAY: 1
+
+Mem Access Count: 8
+Number of Hits:   4
+Number of Misses: 4
+---------------------------------

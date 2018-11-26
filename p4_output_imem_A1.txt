@@ -1372,7 +1372,7 @@ Number of Hits:   4
 Number of Misses: 4
 ---------------------------------SET ASSOCIATIVE CACHE
 Number of Sets: 2
-Number of Ways: 4
+Number of Ways: 2
 Number of Words in Block: 2
 ------Mem Cache Information------
 0x2000: MISS

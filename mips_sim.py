@@ -1,10 +1,10 @@
 import math
 
 print("ECE 366 Project 4: MIPS Simulator")
-#file_name = "A1.txt"
+# file_name = "A1.txt"
 # file_name = "A2.txt"
-file_name = "B1.txt"
-# file_name = "B2.txt"
+# file_name = "B1.txt"
+file_name = "B2.txt"
 
 output_text_file_name = "p4_output_imem_" + file_name
 print("OUTPUT FILE NAME: ", output_text_file_name)
@@ -631,10 +631,5 @@ def simulator(instr_mem_file_name):
     run_cache_sim_config(block_size, num_ways, num_sets, addr_mem)
 
 
-
 simulator(file_name)
-#simulator("A2.txt")
-# simulator("B1.txt")
-# simulator("B2.txt")
-# simulator("i_mem.txt")
 output_file.close()

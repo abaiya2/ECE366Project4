@@ -2424,3 +2424,368 @@ $7: 0
 ADDI $2, $2, 4
 Multi-Cycle Count: 4 Cycles
 (1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: -16383
+$2: 32
+$3: 1
+$4: 688131
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: -16383
+$2: 32
+$3: 1
+$4: 688131
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW8
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: 8193
+$2: 32
+$3: 1
+$4: 688131
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: 8193
+$2: 32
+$3: 0
+$4: 688131
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $0, $3, 1
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 52
+$1: 8193
+$2: 32
+$3: 0
+$4: 688131
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADD $4, $4, $1
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+3RD INSTR : SW $4, IMM($0)3rd: The instruction 3 counts below this instruction has a HAZARD solved with forwarding
+PC: 56
+$1: 8193
+$2: 32
+$3: 0
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: 8193
+$2: 36
+$3: 0
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 40
+$1: 8193
+$2: 36
+$3: 0
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+LW $1, 8192($2)
+MEM INDEX FOR LW9
+Multi-Cycle Count: 5 Cycles
+SOURCE REG: 0
+SOURCE REG: 1
+A DELAY WILL BE REQUIRED FOR LW
+PC: 44
+$1: -4095
+$2: 36
+$3: 0
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SLT $3, $1, $0
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $3, $0, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 48
+$1: -4095
+$2: 36
+$3: 1
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $0, $3, 1
+A STALL IS NEEDED FOR BNE TO FLUSH THE NEXT INSTR
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 56
+$1: -4095
+$2: 36
+$3: 1
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+ADDI $2, $2, 4
+Multi-Cycle Count: 4 Cycles
+(1st Refers to the next instruction, 2ND to the instruction after that, etc...)
+1ST INSTR: B** $2, $5, IMM
+1st: The next instruction has a HAZARD solved with forwarding
+PC: 60
+$1: -4095
+$2: 40
+$3: 1
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+BNE $5, $2, -6
+Multi-Cycle Count: 3 Cycles
+A STALL IS NEEDED FOR BNE, WHICH NEEDS AN OPERAND
+PC: 64
+$1: -4095
+$2: 40
+$3: 1
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+SW $4, 8192($0)
+Multi-Cycle Count: 4 Cycles
+PC: 68
+$1: -4095
+$2: 40
+$3: 1
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+----------NEXT INSTRUCTION----------
+
+Final Output of Registers
+A2.txt
+PC: 68
+$1: -4095
+$2: 40
+$3: 1
+$4: 696324
+$5: 40
+$6: 0
+$7: 0
+---------CPU INFORMATION----------
+SINGLE-CYCLE CPU INFORMATION:
+DIC/Number  of Cycles   196
+----------------------------------
+MULTI-CYCLE CPU INFORMATION:
+Num of 3 Cycle Instructions: 60
+Num of 4 Cycle Instructions: 126
+Num of 5 Cycle Instructions: 10
+Total Number of Cycles:      734
+----------------------------------
+PIPELINED CPU INFORMATION:
+Num of Data Hazard Delays: 50
+Num of Ctrl Hazard Delays: 34
+Total Number of Cycles:    284
+
+MEMORY ADDRESSES ACCESSED
+0x2000
+0x2004
+0x2008
+0x200c
+0x2010
+0x2014
+0x2018
+0x201c
+0x2020
+0x2024
+
+DIRECTLY MAPPED CACHE
+Number of Words in Block: 4
+Number of Blocks:         2
+0x2000: MISS
+  -->Data Addresses: 0x2000-0x200f stored in BLOCK: 0
+0x2004: HIT
+  -->Data was read from BLOCK:0
+0x2008: HIT
+  -->Data was read from BLOCK:0
+0x200c: HIT
+  -->Data was read from BLOCK:0
+0x2010: MISS
+  -->Data Addresses: 0x2010-0x201f stored in BLOCK: 1
+0x2014: HIT
+  -->Data was read from BLOCK:1
+0x2018: HIT
+  -->Data was read from BLOCK:1
+0x201c: HIT
+  -->Data was read from BLOCK:1
+0x2020: MISS
+  -->Data Addresses: 0x2020-0x202f stored in BLOCK: 0
+0x2024: HIT
+  -->Data was read from BLOCK:0
+
+Mem Access Count: 10
+Number of Hits:   7
+Number of Misses: 3
+---------------------------------DIRECTLY MAPPED CACHE
+Number of Words in Block: 2
+Number of Blocks:         4
+0x2000: MISS
+  -->Data Addresses: 0x2000-0x2007 stored in BLOCK: 0
+0x2004: HIT
+  -->Data was read from BLOCK:0
+0x2008: MISS
+  -->Data Addresses: 0x2008-0x200f stored in BLOCK: 1
+0x200c: HIT
+  -->Data was read from BLOCK:1
+0x2010: MISS
+  -->Data Addresses: 0x2010-0x2017 stored in BLOCK: 2
+0x2014: HIT
+  -->Data was read from BLOCK:2
+0x2018: MISS
+  -->Data Addresses: 0x2018-0x201f stored in BLOCK: 3
+0x201c: HIT
+  -->Data was read from BLOCK:3
+0x2020: MISS
+  -->Data Addresses: 0x2020-0x2027 stored in BLOCK: 0
+0x2024: HIT
+  -->Data was read from BLOCK:0
+
+Mem Access Count: 10
+Number of Hits:   5
+Number of Misses: 5
+---------------------------------FULLY ASSOCIATIVE CACHE
+SET ASSOCIATIVE CACHE
+Number of Sets: 1
+Number of Ways: 4
+Number of Words in Block: 2
+------Mem Cache Information------
+0x2000: MISS
+  -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
+0x2004: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+0x2008: MISS
+  -->Data Addresses 0x2008-0x200f stored in SET: 0 , WAY: 1
+0x200c: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 1
+0x2010: MISS
+  -->Data Addresses 0x2010-0x2017 stored in SET: 0 , WAY: 2
+0x2014: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 2
+0x2018: MISS
+  -->Data Addresses 0x2018-0x201f stored in SET: 0 , WAY: 3
+0x201c: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 3
+0x2020: MISS
+  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 0
+0x2024: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+
+Mem Access Count: 10
+Number of Hits:   5
+Number of Misses: 5
+---------------------------------SET ASSOCIATIVE CACHE
+Number of Sets: 4
+Number of Ways: 2
+Number of Words in Block: 2
+------Mem Cache Information------
+0x2000: MISS
+  -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
+0x2004: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+0x2008: MISS
+  -->Data Addresses 0x2008-0x200f stored in SET: 1 , WAY: 0
+0x200c: HIT
+  -->Data was read from BLOCK in SET: 1 , WAY: 0
+0x2010: MISS
+  -->Data Addresses 0x2010-0x2017 stored in SET: 2 , WAY: 0
+0x2014: HIT
+  -->Data was read from BLOCK in SET: 2 , WAY: 0
+0x2018: MISS
+  -->Data Addresses 0x2018-0x201f stored in SET: 3 , WAY: 0
+0x201c: HIT
+  -->Data was read from BLOCK in SET: 3 , WAY: 0
+0x2020: MISS
+  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 1
+0x2024: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 1
+
+Mem Access Count: 10
+Number of Hits:   5
+Number of Misses: 5
+---------------------------------SET ASSOCIATIVE CACHE
+Number of Sets: 2
+Number of Ways: 2
+Number of Words in Block: 2
+------Mem Cache Information------
+0x2000: MISS
+  -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
+0x2004: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+0x2008: MISS
+  -->Data Addresses 0x2008-0x200f stored in SET: 1 , WAY: 0
+0x200c: HIT
+  -->Data was read from BLOCK in SET: 1 , WAY: 0
+0x2010: MISS
+  -->Data Addresses 0x2010-0x2017 stored in SET: 0 , WAY: 1
+0x2014: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 1
+0x2018: MISS
+  -->Data Addresses 0x2018-0x201f stored in SET: 1 , WAY: 1
+0x201c: HIT
+  -->Data was read from BLOCK in SET: 1 , WAY: 1
+0x2020: MISS
+  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 0
+0x2024: HIT
+  -->Data was read from BLOCK in SET: 0 , WAY: 0
+
+Mem Access Count: 10
+Number of Hits:   5
+Number of Misses: 5
+---------------------------------

@@ -3825,97 +3825,97 @@ DIRECTLY MAPPED CACHE
 Number of Words in Block: 4
 Number of Blocks:         2
 0x2004: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses: 0x2000-0x200f stored in BLOCK: 0
 0x2008: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:0
 0x200c: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:0
 0x2008: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:0
 0x200c: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:0
 0x2010: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses: 0x2010-0x201f stored in BLOCK: 1
 0x200c: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:0
 0x2010: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2014: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2010: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2014: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2018: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2014: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2018: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x201c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2018: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x201c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2020: MISS
-  -->Data Addresses: 0x2020-0x202f stored in BLOCK: 0
+  -->TAG: 000000000000000000100000001  -->Data Addresses: 0x2020-0x202f stored in BLOCK: 0
 0x201c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2020: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2024: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2020: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2024: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2028: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2024: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2028: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x202c: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2028: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x202c: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2030: MISS
-  -->Data Addresses: 0x2030-0x203f stored in BLOCK: 1
+  -->TAG: 000000000000000000100000001  -->Data Addresses: 0x2030-0x203f stored in BLOCK: 1
 0x202c: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2030: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2034: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2030: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2034: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2038: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2034: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2038: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x203c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2038: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x203c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2040: MISS
-  -->Data Addresses: 0x2040-0x204f stored in BLOCK: 0
+  -->TAG: 000000000000000000100000010  -->Data Addresses: 0x2040-0x204f stored in BLOCK: 0
 0x203c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2040: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000010  -->Data was read from BLOCK:0
 0x2044: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000010  -->Data was read from BLOCK:0
 
 Mem Access Count: 45
 Number of Hits:   40
@@ -3924,99 +3924,99 @@ Number of Misses: 5
 Number of Words in Block: 2
 Number of Blocks:         4
 0x2004: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses: 0x2000-0x2007 stored in BLOCK: 0
 0x2008: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses: 0x2008-0x200f stored in BLOCK: 1
 0x200c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2008: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x200c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2010: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses: 0x2010-0x2017 stored in BLOCK: 2
 0x200c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:1
 0x2010: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:2
 0x2014: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:2
 0x2010: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:2
 0x2014: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:2
 0x2018: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses: 0x2018-0x201f stored in BLOCK: 3
 0x2014: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:2
 0x2018: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:3
 0x201c: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:3
 0x2018: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:3
 0x201c: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:3
 0x2020: MISS
-  -->Data Addresses: 0x2020-0x2027 stored in BLOCK: 0
+  -->TAG: 000000000000000000100000001  -->Data Addresses: 0x2020-0x2027 stored in BLOCK: 0
 0x201c: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK:3
 0x2020: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2024: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2020: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2024: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2028: MISS
-  -->Data Addresses: 0x2028-0x202f stored in BLOCK: 1
+  -->TAG: 000000000000000000100000001  -->Data Addresses: 0x2028-0x202f stored in BLOCK: 1
 0x2024: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:0
 0x2028: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x202c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2028: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x202c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2030: MISS
-  -->Data Addresses: 0x2030-0x2037 stored in BLOCK: 2
+  -->TAG: 000000000000000000100000001  -->Data Addresses: 0x2030-0x2037 stored in BLOCK: 2
 0x202c: HIT
-  -->Data was read from BLOCK:1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:1
 0x2030: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:2
 0x2034: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:2
 0x2030: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:2
 0x2034: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:2
 0x2038: MISS
-  -->Data Addresses: 0x2038-0x203f stored in BLOCK: 3
+  -->TAG: 000000000000000000100000001  -->Data Addresses: 0x2038-0x203f stored in BLOCK: 3
 0x2034: HIT
-  -->Data was read from BLOCK:2
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:2
 0x2038: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:3
 0x203c: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:3
 0x2038: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:3
 0x203c: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:3
 0x2040: MISS
-  -->Data Addresses: 0x2040-0x2047 stored in BLOCK: 0
+  -->TAG: 000000000000000000100000010  -->Data Addresses: 0x2040-0x2047 stored in BLOCK: 0
 0x203c: HIT
-  -->Data was read from BLOCK:3
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK:3
 0x2040: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000010  -->Data was read from BLOCK:0
 0x2044: HIT
-  -->Data was read from BLOCK:0
+  -->TAG: 000000000000000000100000010  -->Data was read from BLOCK:0
 
 Mem Access Count: 45
 Number of Hits:   36
@@ -4028,99 +4028,99 @@ Number of Ways: 4
 Number of Words in Block: 2
 ------Mem Cache Information------
 0x2004: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 00000000000000000010000000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
 0x2008: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 00000000000000000010000000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2008-0x200f stored in SET: 0 , WAY: 1
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2008: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2010: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 00000000000000000010000000010  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2010-0x2017 stored in SET: 0 , WAY: 2
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2010: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000010  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000010  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2010: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000010  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000010  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2018: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 00000000000000000010000000011  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2018-0x201f stored in SET: 0 , WAY: 3
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000010  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2018: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000011  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000011  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x2018: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000011  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000011  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x2020: MISS
-  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000000100  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 0
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000011  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x2020: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2020: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2028: MISS
-  -->Data Addresses 0x2028-0x202f stored in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000101  -->Data Addresses 0x2028-0x202f stored in SET: 0 , WAY: 1
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2028: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000101  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000101  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2028: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000101  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000101  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2030: MISS
-  -->Data Addresses 0x2030-0x2037 stored in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000110  -->Data Addresses 0x2030-0x2037 stored in SET: 0 , WAY: 2
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 00000000000000000010000000101  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2030: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000110  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000110  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2030: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000110  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000110  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2038: MISS
-  -->Data Addresses 0x2038-0x203f stored in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000111  -->Data Addresses 0x2038-0x203f stored in SET: 0 , WAY: 3
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 2
+  -->TAG: 00000000000000000010000000110  -->Data was read from BLOCK in SET: 0 , WAY: 2
 0x2038: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000111  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000111  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x2038: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000111  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000111  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x2040: MISS
-  -->Data Addresses 0x2040-0x2047 stored in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000001000  -->Data Addresses 0x2040-0x2047 stored in SET: 0 , WAY: 0
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 3
+  -->TAG: 00000000000000000010000000111  -->Data was read from BLOCK in SET: 0 , WAY: 3
 0x2040: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000001000  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2044: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 00000000000000000010000001000  -->Data was read from BLOCK in SET: 0 , WAY: 0
 
 Mem Access Count: 45
 Number of Hits:   36
@@ -4131,103 +4131,103 @@ Number of Ways: 2
 Number of Words in Block: 2
 ------Mem Cache Information------
 0x2004: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
 0x2008: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2008-0x200f stored in SET: 1 , WAY: 0
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2008: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2010: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2010-0x2017 stored in SET: 2 , WAY: 0
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2010: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 2 , WAY: 0
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 2 , WAY: 0
 0x2010: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 2 , WAY: 0
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 2 , WAY: 0
 0x2018: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2018-0x201f stored in SET: 3 , WAY: 0
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 2 , WAY: 0
 0x2018: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 3 , WAY: 0
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 3 , WAY: 0
 0x2018: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 3 , WAY: 0
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 3 , WAY: 0
 0x2020: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 1
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 0
+  -->TAG: 000000000000000000100000000  -->Data was read from BLOCK in SET: 3 , WAY: 0
 0x2020: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2020: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2028: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2028-0x202f stored in SET: 1 , WAY: 1
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2028: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2028: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2030: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2030-0x2037 stored in SET: 2 , WAY: 1
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2030: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 2 , WAY: 1
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 2 , WAY: 1
 0x2030: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 2 , WAY: 1
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 2 , WAY: 1
 0x2038: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 000000000000000000100000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2038-0x203f stored in SET: 3 , WAY: 1
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 2 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 2 , WAY: 1
 0x2038: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 3 , WAY: 1
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 3 , WAY: 1
 0x2038: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 3 , WAY: 1
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 3 , WAY: 1
 0x2040: MISS
-  -->Data Addresses 0x2040-0x2047 stored in SET: 0 , WAY: 0
+  -->TAG: 000000000000000000100000010  -->Data Addresses 0x2040-0x2047 stored in SET: 0 , WAY: 0
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 3 , WAY: 1
+  -->TAG: 000000000000000000100000001  -->Data was read from BLOCK in SET: 3 , WAY: 1
 0x2040: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 000000000000000000100000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2044: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 000000000000000000100000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 
 Mem Access Count: 45
 Number of Hits:   36
@@ -4238,99 +4238,99 @@ Number of Ways: 2
 Number of Words in Block: 2
 ------Mem Cache Information------
 0x2004: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 0000000000000000001000000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2000-0x2007 stored in SET: 0 , WAY: 0
 0x2008: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 0000000000000000001000000000  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2008-0x200f stored in SET: 1 , WAY: 0
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2008: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2010: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 0000000000000000001000000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2010-0x2017 stored in SET: 0 , WAY: 1
 0x200c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000000  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2010: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2010: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2018: MISS
-  -->Valid Bit Changed from 0 to 1 for this block 
+  -->TAG: 0000000000000000001000000001  -->Valid Bit Changed from 0 to 1 for this block 
   -->Data Addresses 0x2018-0x201f stored in SET: 1 , WAY: 1
 0x2014: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2018: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2018: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2020: MISS
-  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data Addresses 0x2020-0x2027 stored in SET: 0 , WAY: 0
 0x201c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000001  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2020: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2020: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2028: MISS
-  -->Data Addresses 0x2028-0x202f stored in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data Addresses 0x2028-0x202f stored in SET: 1 , WAY: 0
 0x2024: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2028: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2028: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2030: MISS
-  -->Data Addresses 0x2030-0x2037 stored in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data Addresses 0x2030-0x2037 stored in SET: 0 , WAY: 1
 0x202c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 0
+  -->TAG: 0000000000000000001000000010  -->Data was read from BLOCK in SET: 1 , WAY: 0
 0x2030: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2030: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2038: MISS
-  -->Data Addresses 0x2038-0x203f stored in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data Addresses 0x2038-0x203f stored in SET: 1 , WAY: 1
 0x2034: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 0 , WAY: 1
 0x2038: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2038: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2040: MISS
-  -->Data Addresses 0x2040-0x2047 stored in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000100  -->Data Addresses 0x2040-0x2047 stored in SET: 0 , WAY: 0
 0x203c: HIT
-  -->Data was read from BLOCK in SET: 1 , WAY: 1
+  -->TAG: 0000000000000000001000000011  -->Data was read from BLOCK in SET: 1 , WAY: 1
 0x2040: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 0x2044: HIT
-  -->Data was read from BLOCK in SET: 0 , WAY: 0
+  -->TAG: 0000000000000000001000000100  -->Data was read from BLOCK in SET: 0 , WAY: 0
 
 Mem Access Count: 45
 Number of Hits:   36

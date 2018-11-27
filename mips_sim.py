@@ -3,10 +3,10 @@ import math
 print("ECE 366 Project 4: MIPS Simulator")
 
 # Choose the instruction file name here by uncommenting
-file_name = "A1.txt"
+# file_name = "A1.txt"
 # file_name = "A2.txt"
 # file_name = "B1.txt"
-# file_name = "B2.txt"
+file_name = "B2.txt"
 
 # Create the output file which will store simulation details
 output_text_file_name = "p4_output_imem_" + file_name
@@ -173,7 +173,8 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             if cache[block_index] == most_sig_bits:
                 print(str(hex(addr_mem[i]) + ": HIT"))
                 output_file.write(str(hex(addr_mem[i]) + ": HIT") + "\n")
-
+                print("  -->TAG: " + most_sig_bits)
+                output_file.write("  -->TAG: " + most_sig_bits)
                 hits = hits + 1
                 print("  -->Data was read from BLOCK:", block_index)
                 output_file.write("  -->Data was read from BLOCK:" + str(block_index) + "\n")
@@ -181,6 +182,8 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             else:
                 print(str(hex(addr_mem[i]) + ": MISS"))
                 output_file.write(str(hex(addr_mem[i]) + ": MISS") + "\n")
+                print("  -->TAG: " + most_sig_bits)
+                output_file.write("  -->TAG: " + most_sig_bits)
                 if not cache[block_index]:
                     print("  -->Valid Bit Changed from 0 to 1")
                     output_file.write("  -->Valid Bit Changed from 0 to 1 for this block \n")
@@ -242,6 +245,8 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             if block_found:
                 print(str(hex(addr_mem[i]) + ": HIT"))
                 output_file.write(str(hex(addr_mem[i]) + ": HIT") + "\n")
+                print("  -->TAG: " + tag)
+                output_file.write("  -->TAG: " + tag)
                 print("  -->Data was read from BLOCK in SET: " + str(set_index) + " , WAY: " + str(block_index))
                 output_file.write("  -->Data was read from BLOCK in SET: " + str(set_index) + " , WAY: " + str(block_index) + "\n")
                 hits = hits + 1
@@ -249,7 +254,8 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 print(str(hex(addr_mem[i]) + ": MISS"))
                 output_file.write(str(hex(addr_mem[i]) + ": MISS") + "\n")
                 misses = misses + 1
-
+                print("  -->TAG: " + tag)
+                output_file.write("  -->TAG: " + tag)
                 # Find index of least recently used block to replace
                 current_set = least_recently_used[set_index]
                 index_of_lru = current_set.index(min(current_set))

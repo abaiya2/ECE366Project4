@@ -3,10 +3,10 @@ import math
 print("ECE 366 Project 4: MIPS Simulator")
 
 # Choose the instruction file name here by uncommenting
-# file_name = "A1.txt"
+file_name = "A1.txt"
 # file_name = "A2.txt"
 # file_name = "B1.txt"
-file_name = "B2.txt"
+# file_name = "B2.txt"
 
 # Create the output file which will store simulation details
 output_text_file_name = "p4_output_imem_" + file_name
@@ -181,6 +181,9 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
             else:
                 print(str(hex(addr_mem[i]) + ": MISS"))
                 output_file.write(str(hex(addr_mem[i]) + ": MISS") + "\n")
+                if not cache[block_index]:
+                    print("  -->Valid Bit Changed from 0 to 1")
+                    output_file.write("  -->Valid Bit Changed from 0 to 1 for this block \n")
                 cache[block_index] = most_sig_bits
                 misses = misses + 1
                 address_range = str(hex(block_start)) + "-" + str(hex(block_start+num_bytes-1))
@@ -252,6 +255,9 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
                 index_of_lru = current_set.index(min(current_set))
                 lru_value = least_recently_used[set_index][index_of_lru]
                 least_recently_used[set_index][index_of_lru] = lru_value + num_ways
+                if not cache_tags[set_index][index_of_lru]:
+                    print("  -->Valid Bit Changed from 0 to 1")
+                    output_file.write("  -->Valid Bit Changed from 0 to 1 for this block \n")
                 cache_tags[set_index][index_of_lru] = tag
                 addr_offset_from_start = (addr_mem[i] - 0x2000) % (num_words * 4)
                 block_start = addr_mem[i] - addr_offset_from_start

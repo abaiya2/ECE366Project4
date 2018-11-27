@@ -1,20 +1,26 @@
 import math
 
 print("ECE 366 Project 4: MIPS Simulator")
+
+# Choose the instruction file name here by uncommenting
 # file_name = "A1.txt"
 # file_name = "A2.txt"
 # file_name = "B1.txt"
 file_name = "B2.txt"
 
+# Create the output file which will store simulation details
 output_text_file_name = "p4_output_imem_" + file_name
 print("OUTPUT FILE NAME: ", output_text_file_name)
 output_file = open(output_text_file_name, "w")
 
 
+# Used to check if the user input values for custom cache
+# Is a valid power of 2, to prevent cache issues
 def is_power_two(num):
     return ((num & num - 1) == 0) and num != 0
 
 
+# Used to convert decimal to 2s complement binary
 def decimal_to_bin(dec_num):
     if dec_num < 0:
         pos_value = 0 - dec_num
@@ -26,6 +32,7 @@ def decimal_to_bin(dec_num):
         return bin_num
 
 
+# Converts 2s complement binary to decimal in 16 bits
 def bin_to_decimal(bin_str):
     if bin_str[0] == "1":
         pos_num = int(bin_str, 2)
@@ -37,6 +44,7 @@ def bin_to_decimal(bin_str):
         return dec_num
 
 
+# Converts 2s complement binary to decimal in 32 bits
 def bin_to_decimal_32b(bin_str):
     if bin_str[0] == "1":
         pos_num = int(bin_str, 2)
@@ -48,14 +56,17 @@ def bin_to_decimal_32b(bin_str):
         return dec_num
 
 
+# Converts hex string to binary string
 def hex_to_bin(hex_str):
     return str(bin(int(hex_str, 16))[2:].zfill(32))
 
 
+# Converts binary number to hex number
 def bin_to_hex(bin_num):
     return '0x{0:08X}'.format(int(bin_num, 2))
 
 
+# Create an array made up of each each line in the given input file
 def file_to_array(file):
     return_array = []
     for line in file:
@@ -63,6 +74,7 @@ def file_to_array(file):
     return return_array
 
 
+# Ouputs the PC, and Registers $1-$7
 def print_output(reg_arr, pc):
     print("PC: ", str(pc))
     output_file.write("PC: " + str(pc) + "\n")
@@ -71,6 +83,8 @@ def print_output(reg_arr, pc):
         output_file.write("$" + str(i) + ": " + str(reg_arr[i]) + "\n")
 
 
+# Returns the useful source and target registers of a dependent instruction
+# which is given by a hex string
 def get_dependent_instruction(mc_hex):
     bin_str = hex_to_bin(mc_hex)
     rd = 0
@@ -121,6 +135,9 @@ def get_dependent_instruction(mc_hex):
     return [source_registers, target_register, output]
 
 
+# Function for running the cache sim, with given inputs
+# number of words per block, number of ways, number of sets,
+# and an address memory array of memory locations that were accessed
 def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
     hits = 0
     misses = 0
@@ -140,8 +157,6 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
         output_file.write("Number of Words in Block: " + str(num_words) + "\n")
         output_file.write("Number of Blocks:         " + str(num_sets) + "\n")
 
-        # print("Num Block Bits", num_block_bits)
-        # print("Number of offset bits", num_offset_bits)
         for i in range(0, len(addr_mem)):
             bin_num = decimal_to_bin(addr_mem[i])
             bin_str = str(bin_num)
@@ -256,6 +271,8 @@ def run_cache_sim_config(num_words, num_ways, num_sets, addr_mem):
     output_file.write("---------------------------------")
 
 
+# Driver function that calls run_cache_sim_config for each of the
+# four given cache sim test cases
 def cache_sim(addr_mem):
     print("\n")
     output_file.write("\n")
@@ -274,6 +291,8 @@ def cache_sim(addr_mem):
     run_cache_sim_config(2, 2, 4, addr_mem)   #config 3D
 
 
+# Displays all of the information for the forwarding information
+# that prevents delays
 def display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd):
     instr_reg_next = get_dependent_instruction(mc_next)
     instr_reg_2nd = get_dependent_instruction(mc_2nd)
@@ -327,6 +346,8 @@ def display_forwarding_uses(rd, mc_next, mc_2nd, mc_3rd):
             output_file.write(
                 "3rd: Register used as target in this instruction is used as target in the 3rd, and operand in the 4th" + "\n")
 
+
+# Function that is run for each instruction in the instruction memory
 def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, adjacent_mc_codes):
     mc_prev = adjacent_mc_codes[0]
     mc_next = adjacent_mc_codes[1]
@@ -490,7 +511,8 @@ def execute_operation(mc_hex, data_mem, reg_arr, pc, num_multicycle_instr, pipe_
     return [data_mem, reg_arr, pc, num_multicycle_instr, pipe_delays, lw_addr]
 
 
-# Give cpu_design a value of 0 for Multi-Cycle or 1 for Pipelined
+# Function that wraps the simulation, by taking in the file name of the instruction
+# memory text file
 def simulator(instr_mem_file_name):
     # Use the file name to create an array of instructions
     instr_mem_file = open(instr_mem_file_name, "r")
@@ -509,6 +531,7 @@ def simulator(instr_mem_file_name):
     addr_mem = []
 
     while mc_hex != "0x1000FFFF" or mc_hex != "0x1000ffff":
+        # Checks breaking condition, which is the last dead loop
         if mc_hex == "0x1000ffff":
             dic += 1
             num_multicycle_instr[0] += 1
@@ -517,6 +540,8 @@ def simulator(instr_mem_file_name):
         mc_hex_2nd_next = "0xffffffff"
         mc_hex_3rd_next = "0xffffffff"
 
+        # Gets the next few instructions, which can be
+        # checked for hazards and dependencies
         if index == 0:
             mc_hex_prev = "0xffffffff"
             mc_hex_next = instr_mem[index + 1]
@@ -551,6 +576,7 @@ def simulator(instr_mem_file_name):
         num_multicycle_instr = data_set[3]
         pipe_delays = data_set[4]
         lw_addr_index = data_set[5]
+        # Gets the address of any potential lw instruction
         if lw_addr_index != 999999999:
             addr_mem.append(data_set[5])
         # print("INDEX:          ", index)
@@ -565,6 +591,7 @@ def simulator(instr_mem_file_name):
         mc_hex = instr_mem[index]
         dic += 1
 
+    # Final output
     print("\nFinal Output of Registers")
     output_file.write("\nFinal Output of Registers" + "\n")
     print(instr_mem_file_name)
@@ -613,11 +640,13 @@ def simulator(instr_mem_file_name):
     output_file.write("Num of Ctrl Hazard Delays: " + str(ctrl_haz_delays) + "\n")
     output_file.write("Total Number of Cycles:    " + str(pipeline_cycle_count) + "\n")
 
+    # Allows the user to enter custom sizes for a memory cache config
     cache_sim(addr_mem)
     block_size = int(input("Enter the block size:   "))
     num_ways = int(input("Enter the number of ways: "))
     num_sets = int(input("Enter the number of sets:  "))
 
+    # Ensures values given are in powers
     if not is_power_two(block_size):
         print("Entered block size is not a power of 2. Defaulting to 2 words")
         block_size = 2
@@ -628,8 +657,10 @@ def simulator(instr_mem_file_name):
         print("Entered number of sets is not a power of 2. Defaulting to 2 sets")
         num_sets = 2
 
+    # Runs the cache sim for custom user input sizes
     run_cache_sim_config(block_size, num_ways, num_sets, addr_mem)
 
 
+# Runs the main simulator, which encapsulates everything in this file
 simulator(file_name)
 output_file.close()
